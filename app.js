@@ -7,15 +7,15 @@ async function edit (err, name) {
 
   var article = document.querySelector('article')
   var settings = { placeholder: 'Hatch a plot...' }
-  var editor = await BalloonEditor.create(article, settings).catch(console.error)
-  var saved = localStorage.getItem(name)
+  var editor = await InlineEditor.create(article, settings).catch(console.error)
+  var content = localStorage.getItem(name)
 
-  if (saved) {
-    editor.setData(saved)
+  if (content) {
+    editor.setData(content)
   }
 
   editor.model.document.on('change:data', function () {
-    var content = editor.getData()
+    content = editor.getData()
     localStorage.setItem(name, content)
   })
 }
