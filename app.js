@@ -5,9 +5,9 @@ async function edit (err, name) {
     return console.error(err)
   }
 
-  var main = document.querySelector('main')
+  var article = document.querySelector('article')
   var settings = { placeholder: 'Hatch a plot...' }
-  var editor = await BalloonEditor.create(main, settings).catch(console.error)
+  var editor = await BalloonEditor.create(article, settings).catch(console.error)
   var saved = localStorage.getItem(name)
 
   if (saved) {
