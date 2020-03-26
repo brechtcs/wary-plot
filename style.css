@@ -1,0 +1,29 @@
+html {
+  background: #fdf6e3;
+  color: #657b83;
+  font-family: Georgia, serif;
+  line-height: 1.4;
+}
+body {
+  padding-left: 3em;
+  padding-right: 1em;
+  margin: 0 auto;
+  max-width: 37em;
+}
+
+main {
+  --ck-focus-ring: 1px solid #657b83;
+}
+
+h1, h2, h3, h4, a {
+  color: #002b36;
+}
+
+h1 {
+  font-variant: small-caps;
+  text-align: right;
+}
+
+.ck-placeholder {
+  opacity: .62em;
+}
