@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Overview (Wary Plot)</title>
+
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <main>
+      <h1><a href="/overview">Wary Plot</a></h1>
+      <nav>
+        <p>Want to create a <a href="/">new editor</a>?<p>
+      </nav>
+    </main>
+    <script>
+      var items = Object.keys(localStorage)
+
+      if (items.length) {
+        var msg = document.querySelector('nav > p')
+        msg.innerHTML += '<br>Or revisit a saved text...'
+
+        var nav = document.querySelector('nav')
+        var menu = h('ul', {}, items.map(link))
+        nav.appendChild(menu)
+      }
+
+      function link (name) {
+        return h('li', {}, h('a', { href: '/?name=' + name }, name))
+      }
+
+      function h (tag, attrs = {}, children = []) {
+        children = Array.isArray(children) ? children : [children]
+        var el = document.createElement(tag)
+
+        Object.keys(attrs).forEach(function (attr) {
+          el.setAttribute(attr, attrs[attr])
+        })
+
+        children.forEach(function (child) {
+          if (typeof child === 'string') {
+            el.innerText += child
+          } else {
+            el.appendChild(child)
+          }
+        })
+
+        return el
+      }
+    </script>
+  </body>
+</html>
