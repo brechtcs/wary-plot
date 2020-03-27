@@ -11,7 +11,7 @@
     <main>
       <h1><a href="/overview">Wary Plot</a></h1>
       <nav>
-        <p>Want to create a <a href="/">new editor</a>?<p>
+        <p>Want to create a <a href="/editor">new editor</a>?<p>
       </nav>
     </main>
     <script>
@@ -27,7 +27,7 @@
       }
 
       function link (name) {
-        return h('li', {}, h('a', { href: '/?name=' + name }, name))
+        return h('li', {}, h('a', { href: '/editor?name=' + name }, name))
       }
 
       function h (tag, attrs = {}, children = []) {
