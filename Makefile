@@ -1,3 +1,8 @@
+.PHONY: dev
+
+dev: vendor
+	surge . draft-pamphlets.surge.sh
+
 vendor: vendor/ckeditor.js
 
 vendor/ckeditor.js: Makefile

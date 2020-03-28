@@ -1,4 +1,6 @@
-open(edit)
+var settings = {
+  placeholder: 'Start drafting...'
+}
 
 async function edit (err, name) {
   if (err) {
@@ -6,7 +8,6 @@ async function edit (err, name) {
   }
 
   var article = document.querySelector('article')
-  var settings = { placeholder: 'Hatch a plot...' }
   var editor = await InlineEditor.create(article, settings).catch(console.error)
   var content = localStorage.getItem(name)
 
@@ -22,19 +23,20 @@ async function edit (err, name) {
 
 function open (done) {
   var ready = ['complete', 'interactive']
-  var url = new URL(window.location)
-  var init = function () {
+
+  function init () {
+    var url = new URL(window.location)
     var name = null
 
     if (url.searchParams.has('name')) {
       name = url.searchParams.get('name')
     } else {
-      name = prompt('Open or create a document.\nChoose:')
+      name = prompt('Name your draft:')
       url.searchParams.set('name', name)
       history.pushState({}, '', url)
     }
 
-    document.title = name + ' (Wary Plot)'
+    document.title = name + ' · Drafts'
     done(null, name)
   }
 
@@ -43,3 +45,5 @@ function open (done) {
   }
   document.addEventListener('DOMContentLoaded', init)
 }
+
+open(edit)
