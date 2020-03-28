@@ -20,6 +20,30 @@ async function edit (err, name) {
     content = editor.getData()
     localStorage.setItem(key, content)
   })
+
+  actions(key, name, editor)
+}
+
+function actions (key, name, editor) {
+  var el = document.querySelector('.actions')
+  var file = name + '.html'
+  var download = h('a', { href: '#', download: file }, 'Download')
+  var mailto = h('a', { href: '#' }, 'Email')
+
+  var content = ''
+
+  download.addEventListener('click', function () {
+    content = encodeURIComponent(editor.getData())
+    download.href = 'data:text/html,' + content
+  })
+
+  mailto.addEventListener('click', function () {
+    content = encodeURIComponent(editor.getData())
+    mailto.href = 'mailto:?subject=' + key + '&body=' + content
+  })
+
+  el.appendChild(download)
+  el.appendChild(mailto)
 }
 
 function open (done) {
