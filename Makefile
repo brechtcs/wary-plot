@@ -1,10 +1,10 @@
-.PHONY: dev
+.PHONY: all test
 
-dev: vendor
+test: all
 	surge . draft-pamphlets.surge.sh
 
-vendor: vendor/ckeditor.js
+all: vendor/ckeditor.js
 
-vendor/ckeditor.js: Makefile
+vendor/%.js: vendor/%.txt
 	mkdir -p $(dir $@)
-	curl -L https://cdn.ckeditor.com/ckeditor5/18.0.0/inline/ckeditor.js > $@
+	curl -L "`cat $<`" > $@

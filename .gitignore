@@ -1,1 +1,2 @@
-vendor
+vendor/*.css
+vendor/*.js
