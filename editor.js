@@ -7,9 +7,10 @@ async function edit (err, name) {
     return console.error(err)
   }
 
+  var key = encodeURIComponent(name)
   var article = document.querySelector('article')
   var editor = await InlineEditor.create(article, settings).catch(console.error)
-  var content = localStorage.getItem(name)
+  var content = localStorage.getItem(key)
 
   if (content) {
     editor.setData(content)
@@ -17,7 +18,7 @@ async function edit (err, name) {
 
   editor.model.document.on('change:data', function () {
     content = editor.getData()
-    localStorage.setItem(name, content)
+    localStorage.setItem(key, content)
   })
 }
 
@@ -25,14 +26,16 @@ function open (done) {
   var ready = ['complete', 'interactive']
 
   function init () {
+    var name, key
     var url = new URL(window.location)
-    var name = null
 
     if (url.searchParams.has('name')) {
-      name = url.searchParams.get('name')
+      key = url.searchParams.get('name')
+      name = decodeURIComponent(key)
     } else {
       name = prompt('Name your draft:')
-      url.searchParams.set('name', name)
+      key = encodeURIComponent(name)
+      url.searchParams.set('name', key)
       history.pushState({}, '', url)
     }
 

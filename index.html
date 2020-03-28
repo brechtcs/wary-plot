@@ -27,8 +27,10 @@
         nav.appendChild(menu)
       }
 
-      function link (name) {
-        return h('li', {}, h('a', { href: '/editor?name=' + name }, name))
+      function link (key) {
+        var name = decodeURIComponent(key)
+        var href = '/editor?name=' + key
+        return h('li', {}, h('a', { href }, name))
       }
     </script>
   </body>
