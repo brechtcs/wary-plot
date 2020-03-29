@@ -33,7 +33,7 @@ article.ck-focused {
   background: black;
 }
 
-h1, h2, h3, h4, a {
+h1, h2, h3, h4, strong, a {
   color: white;
 }
 
@@ -41,6 +41,15 @@ h1 {
   font-variant: small-caps;
   margin-top: 0;
   text-align: right;
+}
+
+strong, em {
+  padding: 0 .2em;
+}
+
+em {
+  font-style: normal;
+  font-variant: small-caps;
 }
 
 hr {
