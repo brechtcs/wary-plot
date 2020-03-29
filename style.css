@@ -49,6 +49,7 @@ hr {
 }
 
 form {
+  display: none;
   font-size: .8em;
 }
 form > * + * {

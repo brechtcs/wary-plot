@@ -11,6 +11,7 @@ async function edit (err, name) {
   var article = document.querySelector('article')
   var editor = await InlineEditor.create(article, settings).catch(console.error)
   var content = localStorage.getItem(key)
+  actions(key, name, editor)
 
   if (content) {
     editor.setData(content)
@@ -20,8 +21,6 @@ async function edit (err, name) {
     content = editor.getData()
     localStorage.setItem(key, content)
   })
-
-  actions(key, name, editor)
 }
 
 function actions (key, name, editor) {
@@ -66,6 +65,7 @@ function actions (key, name, editor) {
   fieldset.appendChild(download)
   fieldset.appendChild(mailto)
   form.appendChild(fieldset)
+  form.style.display = 'block'
 }
 
 function open (done) {
