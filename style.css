@@ -44,13 +44,13 @@ h1 {
 }
 
 hr {
+  border-style: dotted;
   color: inherit;
   margin: 2em 0;
 }
 
 form {
   display: none;
-  font-size: .8em;
 }
 form > * + * {
   margin-top: 1em;
@@ -74,7 +74,7 @@ button, input, [role=button] {
   border-radius: 2px;
   color: inherit;
   cursor: pointer;
-  font-size: inherit;
+  font-size: .8em;
   font-variant: small-caps;
   padding: 2px .5em;
   text-decoration: none;
@@ -85,7 +85,7 @@ button:hover, input:hover, [role=button]:hover {
   background: whitesmoke;
   color: black;
 }
-button[name=trash]:hover {
+button[name=trash]:hover, button[name=purge]:hover {
   background: red;
   border: 1px solid red;
   color: white;

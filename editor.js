@@ -44,8 +44,6 @@ function actions (key, name, editor) {
   })
 
   form.elements.trash.addEventListener('click', function () {
-    var check = prompt('Type the name of the draft to delete it.\nName: ' + name)
-    if (name !== check) return alert('Wrong name, draft was not deleted.')
     sessionStorage.setItem(key, editor.getData())
     localStorage.removeItem(key)
     window.location = '/'

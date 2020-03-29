@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Overview · Drafts</title>
+
+    <link rel="stylesheet" href="/style.css">
+    <script src="/h.js"></script>
+  </head>
+  <body>
+    <main>
+      <h1><a href="/">Drafts</a></h1>
+      <form name="actions">
+	<fieldset>
+          <input type="text" name="name">
+          <button type="button" name="restore">Restore</button>
+          <button type="button" name="purge">Purge</button>  
+	</fieldset>
+      </form>
+      <article></article>
+      <script>
+        var url = new URL(window.location)
+        var key = url.searchParams.get('name')
+
+        if (key) {
+          var article = document.querySelector('article')
+          var form = document.actions
+
+          var name = decodeURIComponent(key)
+          var content = sessionStorage.getItem(key)
+          article.innerHTML = content
+
+          form.elements.restore.addEventListener('click', function () {
+            var prev = key
+            key = encodeURIComponent(form.elements.name.value)
+            localStorage.setItem(key, content)
+            sessionStorage.removeItem(prev)
+            window.location = '/editor?name=' + key
+	  })
+
+          form.elements.purge.addEventListener('click', function () {
+            form.elements.name.value = name
+            var check = prompt(`Purge ${name}? Type 'purge' to confirm.`)
+            if (check.toLowerCase() !== 'purge') return alert(`Purge not confirmed, ${name} was kept`)
+            sessionStorage.removeItem(key)
+            window.location = '/'
+	  })
+
+          form.elements.name.value = name
+          form.style.display = 'block'
+	}
+      </script>
+  </body>
+</html>
