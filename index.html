@@ -12,18 +12,21 @@
     <main>
       <h1><a href="/">Drafts</a></h1>
       <nav>
-        <p>Want to create a <a href="/editor">new draft</a>?<p>
+        <p><a href="/editor"><strong>+new draft</strong></a><p>
+        <p>Drafts are stored in your browser's local storage. This means that they will not synchronise with a server or any other device. It also means that <strong>you might lose your drafts</strong> when the browser cache is cleared!</p>
+        <p>Use the <em>Download</em> feature to store important drafts safely on your file system.</p>
       </nav>
     </main>
     <script>
       var items = Object.keys(localStorage)
 
       if (items.length) {
-        var msg = document.querySelector('nav > p')
-        msg.innerHTML += '<br>Or revisit a previous one...'
-
         var nav = document.querySelector('nav')
+        var msg = h('p', {}, 'Want to revisit a previous draft?')
         var menu = h('ul', {}, items.map(link))
+
+        nav.appendChild(h('hr'))
+        nav.appendChild(msg)
         nav.appendChild(menu)
       }
 
