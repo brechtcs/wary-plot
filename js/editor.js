@@ -40,7 +40,7 @@ function actions (key, name, editor) {
     key = encodeURIComponent(name)
     localStorage.setItem(key, editor.getData())
     localStorage.removeItem(prev)
-    window.location = '/editor?name=' + key
+    window.location = '/editor?draft=' + key
   })
 
   form.elements.trash.addEventListener('click', function () {
@@ -73,13 +73,13 @@ function open (done) {
     var name, key
     var url = new URL(window.location)
 
-    if (url.searchParams.has('name')) {
-      key = url.searchParams.get('name')
+    if (url.searchParams.has('draft')) {
+      key = url.searchParams.get('draft')
       name = decodeURIComponent(key)
     } else {
       name = prompt('Name your draft:')
       key = encodeURIComponent(name)
-      url.searchParams.set('name', key)
+      url.searchParams.set('draft', key)
       history.pushState({}, '', url)
     }
 

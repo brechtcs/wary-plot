@@ -42,7 +42,7 @@
 
       function link (page, key) {
         var name = decodeURIComponent(key)
-        var href = `/${page}?name=${key}`
+        var href = `/${page}?draft=${key}`
         return h('li', {}, h('a', { href }, name))
       }
 

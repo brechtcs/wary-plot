@@ -15,13 +15,13 @@
 	<fieldset>
           <input type="text" name="name">
           <button type="button" name="restore">Restore</button>
-          <button type="button" name="purge">Purge</button>  
+          <button type="button" name="purge">Purge</button>
 	</fieldset>
       </form>
       <article></article>
       <script>
         var url = new URL(window.location)
-        var key = url.searchParams.get('name')
+        var key = url.searchParams.get('draft')
 
         if (key) {
           var article = document.querySelector('article')
@@ -36,7 +36,7 @@
             key = encodeURIComponent(form.elements.name.value)
             localStorage.setItem(key, content)
             sessionStorage.removeItem(prev)
-            window.location = '/editor?name=' + key
+            window.location = '/editor?draft=' + key
 	  })
 
           form.elements.purge.addEventListener('click', function () {
