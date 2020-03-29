@@ -25,10 +25,10 @@ async function edit (err, name) {
 }
 
 function actions (key, name, editor) {
-  var el = document.querySelector('.actions')
+  var btn = { href: '#', role: 'button' }
   var file = name + '.html'
-  var download = h('a', { href: '#', download: file }, 'Download')
-  var mailto = h('a', { href: '#' }, 'Email')
+  var download = h('a', { ...btn, download: file }, 'Download')
+  var mailto = h('a', btn, 'Email')
 
   var content = ''
 
@@ -42,8 +42,8 @@ function actions (key, name, editor) {
     mailto.href = 'mailto:?subject=' + key + '&body=' + content
   })
 
-  el.appendChild(download)
-  el.appendChild(mailto)
+  document.actions.appendChild(download)
+  document.actions.appendChild(mailto)
 }
 
 function open (done) {

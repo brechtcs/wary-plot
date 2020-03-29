@@ -43,14 +43,14 @@ h1 {
   text-align: right;
 }
 
-.actions > * {
+form * {
   display: inline-block;
 }
-.actions > * + * {
+form * + * {
   margin-left: 1em;
 }
 
-.actions a {
+button, input, [role=button] {
   background: black;
   border: 1px solid;
   border-radius: 2px;
@@ -59,7 +59,7 @@ h1 {
   text-decoration: none;
   user-select: none;
 }
-.actions a:hover {
+button:hover, input:hover, [role=button]:hover {
   background: whitesmoke;
   color: black;
 }
