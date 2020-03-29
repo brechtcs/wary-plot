@@ -43,23 +43,50 @@ h1 {
   text-align: right;
 }
 
-form * {
+form {
+  font-size: .8em;
+}
+form > * + * {
+  margin-top: 1em;
+}
+
+fieldset {
+  border: none;
+  display: block;
+  padding: 0;
+}
+fieldset > * {
   display: inline-block;
 }
-form * + * {
-  margin-left: 1em;
+fieldset > * + * {
+  margin-left: .5em;
 }
 
 button, input, [role=button] {
   background: black;
   border: 1px solid;
   border-radius: 2px;
+  color: inherit;
+  font-size: inherit;
   font-variant: small-caps;
   padding: 2px .5em;
   text-decoration: none;
   user-select: none;
 }
 button:hover, input:hover, [role=button]:hover {
+  border-color: whitesmoke;
   background: whitesmoke;
   color: black;
+}
+button[name=trash]:hover {
+  background: red;
+  border: 1px solid red;
+  color: white;
+}
+
+input {
+  max-width: 7em;
+}
+input[type=text] {
+  font-variant: initial;
 }

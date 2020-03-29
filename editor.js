@@ -25,12 +25,32 @@ async function edit (err, name) {
 }
 
 function actions (key, name, editor) {
+  var form = document.actions
+  form.elements.name.value = name
+
   var btn = { href: '#', role: 'button' }
   var file = name + '.html'
   var download = h('a', { ...btn, download: file }, 'Download')
   var mailto = h('a', btn, 'Email')
 
   var content = ''
+
+  form.elements.rename.addEventListener('click', function () {
+    var prev = key
+    name = form.elements.name.value
+    key = encodeURIComponent(name)
+    localStorage.setItem(key, editor.getData())
+    localStorage.removeItem(prev)
+    window.location = '/editor?name=' + key
+  })
+
+  form.elements.trash.addEventListener('click', function () {
+    var check = prompt('Type the name of the draft to delete it.\nName: ' + name)
+    if (name !== check) return alert('Wrong name, draft was not deleted.')
+    sessionStorage.setItem(key, editor.getData())
+    localStorage.removeItem(key)
+    window.location = '/'
+  })
 
   download.addEventListener('click', function () {
     content = encodeURIComponent(editor.getData())
@@ -42,8 +62,10 @@ function actions (key, name, editor) {
     mailto.href = 'mailto:?subject=' + key + '&body=' + content
   })
 
-  document.actions.appendChild(download)
-  document.actions.appendChild(mailto)
+  var fieldset = h('fieldset')
+  fieldset.appendChild(download)
+  fieldset.appendChild(mailto)
+  form.appendChild(fieldset)
 }
 
 function open (done) {
