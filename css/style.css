@@ -1,4 +1,9 @@
-  html {
+* {
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+html {
   background-attachment: fixed;
   background-image: url('/bg.jpg');
   background-position: 50%;
@@ -12,7 +17,8 @@
 
 body {
   background: rgba(0, 0, 0, .89);
-  color: whitesmoke;
+  border-top: 3px solid gold;
+  color: ivory;
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -29,7 +35,7 @@ main > * + * {
 }
 
 article.ck-focused {
-  --ck-focus-ring: 1px solid;
+  --ck-focus-ring: 1px solid white;
   background: black;
 }
 
@@ -77,33 +83,36 @@ fieldset > * + * {
   margin-left: .5em;
 }
 
-button, input, [role=button] {
-  background: black;
+button, [role=button], input {
   border: 1px solid;
   border-radius: 2px;
-  color: inherit;
-  cursor: pointer;
   font-size: .8em;
-  font-variant: small-caps;
   padding: 2px .5em;
+}
+button, [role=button] {
+  background: ivory;
+  border-color: black;
+  color: black;
+  cursor: pointer;
+  font-variant: small-caps;
   text-decoration: none;
   user-select: none;
 }
-button:hover, input:hover, [role=button]:hover {
-  border-color: whitesmoke;
-  background: whitesmoke;
-  color: black;
+button:hover, [role=button]:hover {
+  background: gold;
 }
 button[name=trash]:hover, button[name=purge]:hover {
   background: red;
-  border: 1px solid red;
+  border-color: red;
   color: white;
 }
 
 input {
+  background: black;
+  border-color: ivory;
+  color: ivory;
   max-width: 7em;
 }
-input[type=text] {
-  cursor: initial;
-  font-variant: initial;
+input:focus {
+  border-color: white;
 }
