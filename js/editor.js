@@ -82,9 +82,7 @@ function actions (key, name, editor) {
 }
 
 function open (done) {
-  var ready = ['complete', 'interactive']
-
-  function init () {
+  ready(function () {
     var name, key
     var url = new URL(window.location)
 
@@ -100,12 +98,7 @@ function open (done) {
 
     document.title = name + ' · Drafts'
     done(null, name)
-  }
-
-  if (ready.includes(document.readyState)) {
-    return setTimeout(init)
-  }
-  document.addEventListener('DOMContentLoaded', init)
+  })
 }
 
 open(edit)
