@@ -34,9 +34,9 @@ main > * + * {
   margin-top: 1em;
 }
 
-article.ck-focused {
-  --ck-focus-ring: 1px solid white;
-  background: black;
+main > header h1 {
+  margin-top: 0;
+  text-align: right;
 }
 
 h1, h2, h3, h4, strong, a {
@@ -45,8 +45,6 @@ h1, h2, h3, h4, strong, a {
 
 h1 {
   font-variant: small-caps;
-  margin-top: 0;
-  text-align: right;
 }
 
 strong, em {
@@ -115,4 +113,19 @@ input {
 }
 input:focus {
   border-color: white;
+}
+
+/**
+ * CKEditor styling:
+ */
+body {
+  --ck-color-text: black;
+  --ck-color-button-default-hover-background: gold;
+  --ck-color-toolbar-background: ivory;
+  --ck-focus-ring: 1px solid;
+}
+
+article.ck-content blockquote {
+  border-left-color: gold;
+  font-style: normal;
 }
