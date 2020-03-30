@@ -14,11 +14,11 @@
         <h1><a href="/">Drafts</a></h1>
       </header>
       <form name="actions">
-	<fieldset>
+        <fieldset>
           <input type="text" name="name">
           <button type="button" name="restore">Restore</button>
           <button type="button" name="purge">Purge</button>
-	</fieldset>
+        </fieldset>
       </form>
       <article></article>
       <script>
@@ -39,7 +39,7 @@
             localStorage.setItem(key, content)
             sessionStorage.removeItem(prev)
             window.location = '/editor?draft=' + key
-	  })
+          })
 
           form.elements.purge.addEventListener('click', function () {
             form.elements.name.value = name
@@ -47,11 +47,11 @@
             if (check.toLowerCase() !== 'purge') return alert(`Purge not confirmed, ${name} was kept`)
             sessionStorage.removeItem(key)
             window.location = '/'
-	  })
+          })
 
           form.elements.name.value = name
           form.style.display = 'block'
-	}
+        }
       </script>
   </body>
 </html>
