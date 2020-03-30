@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  color: inherit;
   font-family: inherit;
 }
 
@@ -12,6 +13,7 @@ html {
   font-family: Georgia, serif;
   line-height: 1.4;
   margin: 0;
+  overflow-y: scroll;
   padding: 0;
 }
 
@@ -39,7 +41,11 @@ main > header h1 {
   text-align: right;
 }
 
-h1, h2, h3, h4, strong, a {
+main > article {
+  min-height: 7em;
+}
+
+h1, h2, h3, h4, strong, em, a {
   color: white;
 }
 
@@ -47,17 +53,13 @@ h1 {
   font-variant: small-caps;
 }
 
-strong, em {
-  padding: 0 .2em;
-}
-
-em {
-  font-style: normal;
-  font-variant: small-caps;
+a:hover {
+  text-decoration: underline double gold;
 }
 
 hr {
-  border-style: dotted;
+  border: none;
+  border-top: dotted;
   color: inherit;
   margin: 2em 0;
 }
@@ -71,33 +73,46 @@ form > * + * {
 
 fieldset {
   border: none;
-  display: block;
+  display: inline-flex;
   padding: 0;
 }
-fieldset > * {
-  display: inline-block;
-}
 fieldset > * + * {
-  margin-left: .5em;
+  border-left: 1px solid grey;
 }
 
 button, [role=button], input {
   border: 1px solid;
-  border-radius: 2px;
   font-size: .8em;
-  padding: 2px .5em;
+  line-height: inherit;
+  padding: .15em .5em;
 }
+fieldset button,
+fieldset [role=button],
+fieldset input {
+  border-right: none;
+}
+nav button, nav [role=button], nav input {
+  font-size: 1em;
+}
+
 button, [role=button] {
   background: ivory;
-  border-color: black;
+  border-color: ivory;
   color: black;
   cursor: pointer;
   font-variant: small-caps;
   text-decoration: none;
   user-select: none;
 }
+fieldset button + button,
+fieldset [role=button] + [role=button],
+fieldset [role=button] + button,
+fieldset button + [role=button] {
+  border-left: 1px dotted black !important;
+}
 button:hover, [role=button]:hover {
   background: gold;
+  border-color: gold;
 }
 button[name=trash]:hover, button[name=purge]:hover {
   background: red;
@@ -106,13 +121,11 @@ button[name=trash]:hover, button[name=purge]:hover {
 }
 
 input {
-  background: black;
-  border-color: ivory;
-  color: ivory;
-  max-width: 7em;
+  background: transparent;
 }
 input:focus {
-  border-color: white;
+  background: black;
+  border-color: gold;
 }
 
 /**
@@ -128,4 +141,7 @@ body {
 article.ck-content blockquote {
   border-left-color: gold;
   font-style: normal;
+}
+article.ck-focused {
+  background: black;
 }

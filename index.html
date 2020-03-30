@@ -14,21 +14,21 @@
         <h1>Drafts</h1>
       </header>
       <nav>
-        <p><a href="/editor"><strong>+new draft</strong></a></p>
-        <p>Drafts are stored in your browser's local storage. This means that they will not automatically synchronize with a server or any other device. It also means that <strong>you might lose your drafts</strong> when the browser cache is cleared!</p>
-        <p>Use the <em>Download</em> feature to store important drafts safely on your file system.</p>
+        <a href="/editor" role="button">+ new draft</a>
       </nav>
+      <p>Drafts are stored in your browser's local storage. This means that they will not automatically synchronize with a server or any other device. It also means that <strong>you might lose your drafts</strong> when the browser cache is cleared!</p>
+      <p>Use the download feature to store important drafts safely on your file system.</p>
     </main>
     <script>
-      var nav = document.querySelector('nav')
+      var main = document.querySelector('main')
       var stored = Object.keys(localStorage)
       var deleted = Object.keys(sessionStorage)
 
       if (stored.length) {
         var drafts = h('ul', {}, stored.map(link.bind(null, 'editor')))
-        nav.appendChild(h('hr'))
-        nav.appendChild(h('p', {}, 'Want to revisit a previous draft?'))
-        nav.appendChild(drafts)
+        main.appendChild(h('hr'))
+        main.appendChild(h('p', {}, 'Want to revisit a previous draft?'))
+        main.appendChild(drafts)
       }
 
       if (deleted.length) {
@@ -36,10 +36,10 @@
         var empty = h('button', { type: 'button', name: 'purge' }, 'Empty Trash')
         empty.addEventListener('click', purge)
 
-        nav.appendChild(h('hr'))
-        nav.appendChild(h('p', {}, 'Need to recover something from the trash?'))
-        nav.appendChild(trash)
-        nav.appendChild(empty)
+        main.appendChild(h('hr'))
+        main.appendChild(h('p', {}, 'Need to recover something from the trash?'))
+        main.appendChild(trash)
+        main.appendChild(empty)
       }
 
       function link (page, key) {
