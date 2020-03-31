@@ -25,3 +25,15 @@ window.h = function (tag, attrs = {}, children = []) {
 
   return el
 }
+
+window.debounce = function (fn, ms) {
+  var timeout = null
+
+  return function (...args) {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      timeout = null
+      fn.apply(this, args)
+    }, ms)
+  }
+}

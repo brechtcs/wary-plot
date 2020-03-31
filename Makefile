@@ -1,10 +1,15 @@
 .PHONY: all test
 
+alertify := vendor/alertify.css vendor/alertify.js
+ckeditor := vendor/ckeditor.js
+
+all: $(alertify) $(ckeditor)
+
 test: all
 	surge . draft-pamphlets.surge.sh
 
-all: vendor/ckeditor.js
+vendor/%.css: vendor/%.css.txt
+	curl -L "`cat $<`" > $@
 
-vendor/%.js: vendor/%.txt
-	mkdir -p $(dir $@)
+vendor/%.js: vendor/%.js.txt
 	curl -L "`cat $<`" > $@

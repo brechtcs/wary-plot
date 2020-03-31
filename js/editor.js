@@ -32,10 +32,11 @@ async function edit (err, name) {
     editor.setData(content)
   }
 
-  editor.model.document.on('change:data', function () {
+  editor.model.document.on('change:data', debounce(function () {
     content = editor.getData()
     localStorage.setItem(key, content)
-  })
+    alertify.success('Saved!')
+  }, 1500))
 }
 
 function actions (key, name, editor) {
