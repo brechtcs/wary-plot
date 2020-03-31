@@ -44,6 +44,7 @@ main > header h1 {
 
 main > article {
   min-height: 7em;
+  margin-top: 2.5em;
 }
 
 h1, h2, h3, h4, strong, em, a {
@@ -133,10 +134,29 @@ input:focus {
  * CKEditor styling:
  */
 body {
-  --ck-color-text: black;
+  --ck-border-radius: 0;
+  --ck-color-focus-border: gold;
+  --ck-color-focus-outer-shadow: none;
+  --ck-color-focus-inner-shadow: none;
+  --ck-color-text: ivory;
+  --ck-color-toolbar-background: black;
+  --ck-color-toolbar-border: ivory;
   --ck-color-button-default-hover-background: gold;
-  --ck-color-toolbar-background: ivory;
-  --ck-focus-ring: 1px solid;
+  --ck-color-button-on-background: dimgrey;
+  --ck-color-button-on-hover-background: darkgray;
+  --ck-color-dropdown-panel-background: black;
+  --ck-color-input-background: black;
+  --ck-color-list-background: black;
+  --ck-color-list-button-hover-background: gold;
+  --ck-color-list-button-on-background: dimgray;
+  --ck-color-list-button-on-background-focus: gold;
+  --ck-color-panel-background: black;
+  --ck-color-panel-border: ivory;
+  --ck-color-link-default: white;
+  --ck-color-link-selected-background: gold;
+  --ck-focus-inner-shadow: none;
+  --ck-focus-outer-shadow: none;
+  --ck-focus-ring: 1px solid ivory;
 }
 
 article.ck-content blockquote {
@@ -145,4 +165,8 @@ article.ck-content blockquote {
 }
 article.ck-focused {
   background: black;
+}
+
+.ck-balloon-panel {
+  transform: translate(-1em, 1em);
 }
