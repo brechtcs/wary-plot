@@ -84,7 +84,7 @@ function actions (key, name, editor) {
     }
   })
 
-  download.addEventListener('click', function (event) {
+  download.addEventListener('click', async function (event) {
     if (download.href) {
       return
     }
@@ -93,18 +93,18 @@ function actions (key, name, editor) {
     content = editor.getData()
     type = options.value
 
-    format(content, { type }, function (err, data) {
-      if (err) {
-        alertify.error(err.message)
-        return console.error(err)
-      }
+    try {
+      var data = await format(content, { type })
       download.href = data
       download.click()
       reset(download, editor)
-    })
+    } catch (err) {
+      alertify.error(err.message)
+      console.error(err)
+    }
   })
 
-  mailto.addEventListener('click', function () {
+  mailto.addEventListener('click', async function (event) {
     if (mailto.href) {
       return
     }
@@ -113,15 +113,15 @@ function actions (key, name, editor) {
     content = editor.getData()
     type = options.value
 
-    format(content, { type, doc: true }, function (err, data) {
-      if (err) {
-        alertify.error(err.message)
-        return console.error(err)
-      }
+    try {
+      var data = await format(content, { type, doc: true })
       mailto.href = 'mailto:?subject=' + key + '&body=' + encodeURIComponent(data)
       mailto.click()
       reset(mailto, editor)
-    })
+    } catch (err) {
+      alertify.error(err.message)
+      console.error(err)
+    }
   })
 
   var fieldset = h('fieldset')
