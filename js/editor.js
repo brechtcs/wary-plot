@@ -64,34 +64,42 @@ function actions (key, name, editor) {
     window.location = '/'
   })
 
-  editor.model.document.on('change:data', function () {
-    if (download.href) {
-      download.removeAttribute('href')
-    }
-  })
-
   download.addEventListener('click', function (event) {
     if (download.href) {
       return
     }
     event.stopPropagation()
     event.preventDefault()
+    content = editor.getData()
 
-    var html = '<!doctype html><head><meta charset="utf-8"></head><html><body>' + editor.getData() + '</body></html>'
-    var docx = htmlDocx.asBlob(html)
-
-    var reader = new FileReader()
-    reader.addEventListener('load', function () {
-      download.href = reader.result
+    format('Word', content, function (err, data) {
+      if (err) {
+        alertify.error(err.message)
+        return console.error(err)
+      }
+      download.href = data
       download.click()
+      reset(download, editor)
     })
-
-    reader.readAsDataURL(docx)
   })
 
   mailto.addEventListener('click', function () {
-    content = encodeURIComponent(editor.getData())
-    mailto.href = 'mailto:?subject=' + key + '&body=' + content
+    if (mailto.href) {
+      return
+    }
+    event.stopPropagation()
+    event.preventDefault()
+    content = editor.getData()
+
+    format('HtmlDocument', content, function (err, data) {
+      if (err) {
+        alertify.error(err.message)
+        return console.error(err)
+      }
+      mailto.href = 'mailto:?subject=' + key + '&body=' + encodeURIComponent(data)
+      mailto.click()
+      reset(mailto, editor)
+    })
   })
 
   var fieldset = h('fieldset')
@@ -99,6 +107,14 @@ function actions (key, name, editor) {
   fieldset.appendChild(mailto)
   form.appendChild(fieldset)
   form.style.display = 'block'
+}
+
+function reset (link, editor) {
+  editor.model.document.once('change:data', function () {
+    if (link.href) {
+      link.removeAttribute('href')
+    }
+  })
 }
 
 function open (done) {
