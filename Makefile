@@ -8,8 +8,8 @@ all: $(alertify) $(ckeditor)
 test: all
 	surge . draft-pamphlets.surge.sh
 
-vendor/%.css: vendor/%.css.txt
+vendor/%.css: vendor/css/%.txt
 	curl -L "`cat $<`" > $@
 
-vendor/%.js: vendor/%.js.txt
+vendor/%.js: vendor/js/%.txt
 	curl -L "`cat $<`" > $@
