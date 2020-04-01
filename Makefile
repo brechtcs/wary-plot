@@ -2,8 +2,9 @@
 
 alertify := vendor/alertify.css vendor/alertify.js
 ckeditor := vendor/ckeditor.js
+html-docx := vendor/html-docx.js
 
-all: $(alertify) $(ckeditor)
+all: $(alertify) $(ckeditor) $(html-docx)
 
 test: all
 	surge . draft-pamphlets.surge.sh

@@ -43,10 +43,9 @@ function actions (key, name, editor) {
   var form = document.actions
   form.elements.name.value = name
 
-  var btn = { href: '#', role: 'button' }
-  var file = name + '.html'
-  var download = h('a', { ...btn, download: file }, 'Download')
-  var mailto = h('a', btn, 'Email')
+  var role = 'button'
+  var download = h('a', { role, download: name + '.docx' }, 'Download')
+  var mailto = h('a', { role }, 'Email')
 
   var content = ''
 
@@ -65,9 +64,29 @@ function actions (key, name, editor) {
     window.location = '/'
   })
 
-  download.addEventListener('click', function () {
-    content = encodeURIComponent(editor.getData())
-    download.href = 'data:text/html,' + content
+  editor.model.document.on('change:data', function () {
+    if (download.href) {
+      download.removeAttribute('href')
+    }
+  })
+
+  download.addEventListener('click', function (event) {
+    if (download.href) {
+      return
+    }
+    event.stopPropagation()
+    event.preventDefault()
+
+    var html = '<!doctype html><head><meta charset="utf-8"></head><html><body>' + editor.getData() + '</body></html>'
+    var docx = htmlDocx.asBlob(html)
+
+    var reader = new FileReader()
+    reader.addEventListener('load', function () {
+      download.href = reader.result
+      download.click()
+    })
+
+    reader.readAsDataURL(docx)
   })
 
   mailto.addEventListener('click', function () {
