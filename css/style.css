@@ -82,7 +82,7 @@ fieldset > * + * {
   border-left: 1px solid grey;
 }
 
-button, [role=button], input {
+button, [role=button], input, select {
   border: 1px solid;
   font-size: .8em;
   line-height: inherit;
@@ -90,14 +90,15 @@ button, [role=button], input {
 }
 fieldset button,
 fieldset [role=button],
-fieldset input {
+fieldset input,
+fieldset select {
   border-right: none;
 }
 nav button, nav [role=button], nav input {
   font-size: 1em;
 }
 
-button, [role=button] {
+button, [role=button], select {
   background: ivory;
   border-color: ivory;
   color: black;
@@ -109,10 +110,15 @@ button, [role=button] {
 fieldset button + button,
 fieldset [role=button] + [role=button],
 fieldset [role=button] + button,
+fieldset [role=button] + select,
+fieldset select + [role=button],
+fieldset select + select,
+fieldset select + button,
+fieldset button + select,
 fieldset button + [role=button] {
   border-left: 1px dotted black !important;
 }
-button:hover, [role=button]:hover {
+button:hover, [role=button]:hover, select:hover {
   background: gold;
   border-color: gold;
 }

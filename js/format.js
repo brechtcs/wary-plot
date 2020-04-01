@@ -1,7 +1,7 @@
-window.format = function (type, content, done) {
+window.format = function (content, { type, doc }, done) {
   switch (type.toLowerCase()) {
-    case 'htmldocument':
-      return formatHtmlDocument(content, done)
+    case 'html':
+      return doc ? formatHtmlDoc(content, done) : formatHtmlData(content, done)
     case 'word':
       return formatWord(content, done)
     default:
@@ -9,7 +9,14 @@ window.format = function (type, content, done) {
   }
 }
 
-function formatHtmlDocument (content, done) {
+function formatHtmlData (content, done) {
+  formatHtmlDoc(content, function (err, html) {
+    if (err) return done(err)
+    done(null, 'data:text/html,' + html)
+  })
+}
+
+function formatHtmlDoc (content, done) {
   setTimeout(function () {
     done(null, `<!doctype html>
       <html>
@@ -23,7 +30,7 @@ function formatHtmlDocument (content, done) {
 }
 
 function formatWord (content, done) {
-  formatHtmlDocument(content, function (err, html) {
+  formatHtmlDoc(content, function (err, html) {
     if (err) return done(err)
     var docx = htmlDocx.asBlob(html)
     var reader = new FileReader()

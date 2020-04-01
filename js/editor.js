@@ -19,6 +19,7 @@ var settings = {
 
 async function edit (err, name) {
   if (err) {
+    alertify.error(err.message)
     return console.error(err)
   }
 
@@ -46,8 +47,14 @@ function actions (key, name, editor) {
   var role = 'button'
   var download = h('a', { role, download: name + '.docx' }, 'Download')
   var mailto = h('a', { role }, 'Email')
+  var options = h('select', {}, [
+    h('option', {}, 'HTML'),
+    h('option', {}, 'Word')
+  ])
 
   var content = ''
+  var type = 'HTML'
+  options.value = type
 
   form.elements.rename.addEventListener('click', function () {
     var prev = key
@@ -64,6 +71,19 @@ function actions (key, name, editor) {
     window.location = '/'
   })
 
+  options.addEventListener('change', function () {
+    switch (options.value.toLowerCase()) {
+      case 'html':
+        download.removeAttribute('href')
+        mailto.removeAttribute('hidden')
+        break
+      case 'word':
+        download.removeAttribute('href')
+        mailto.setAttribute('hidden', true)
+        break
+    }
+  })
+
   download.addEventListener('click', function (event) {
     if (download.href) {
       return
@@ -71,8 +91,9 @@ function actions (key, name, editor) {
     event.stopPropagation()
     event.preventDefault()
     content = editor.getData()
+    type = options.value
 
-    format('Word', content, function (err, data) {
+    format(content, { type }, function (err, data) {
       if (err) {
         alertify.error(err.message)
         return console.error(err)
@@ -90,8 +111,9 @@ function actions (key, name, editor) {
     event.stopPropagation()
     event.preventDefault()
     content = editor.getData()
+    type = options.value
 
-    format('HtmlDocument', content, function (err, data) {
+    format(content, { type, doc: true }, function (err, data) {
       if (err) {
         alertify.error(err.message)
         return console.error(err)
@@ -103,6 +125,7 @@ function actions (key, name, editor) {
   })
 
   var fieldset = h('fieldset')
+  fieldset.appendChild(options)
   fieldset.appendChild(download)
   fieldset.appendChild(mailto)
   form.appendChild(fieldset)
