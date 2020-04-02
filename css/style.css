@@ -68,14 +68,13 @@ hr {
 
 form {
   display: none;
-}
-form > * + * {
   margin-top: 1em;
 }
 
 fieldset {
   border: none;
   display: inline-flex;
+  margin: 0;
   padding: 0;
 }
 fieldset > * + * {
