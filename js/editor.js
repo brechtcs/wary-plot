@@ -36,7 +36,7 @@ async function edit (err, name) {
   editor.model.document.on('change:data', debounce(function () {
     content = editor.getData()
     localStorage.setItem(key, content)
-    alertify.success('Draft saved!')
+    alertify.message('Draft saved.')
   }, 1500))
 
   var style = document.querySelector('style')

@@ -7,19 +7,20 @@
 
 html {
   background-attachment: fixed;
-  background-image: url('/bg.jpg');
+  background-image: url('/img/bg.jpg');
   background-position: 50%;
   background-size: cover;
+  overflow: auto scroll;
+  scrollbar-color: dimgray rgba(0, 0, 0, .89);
 
   line-height: 1.4;
   margin: 0;
-  overflow-y: scroll;
   padding: 0;
 }
 
 body {
   background: rgba(0, 0, 0, .89);
-  border-top: 3px solid gold;
+  border-bottom: .25em solid gold;
   color: ivory;
   min-height: 100vh;
   margin: 0;
@@ -70,13 +71,29 @@ form {
 }
 
 fieldset {
-  border: none;
+  border: 1px solid;
   display: inline-flex;
   margin: 0;
   padding: 0;
 }
-fieldset > * + * {
-  border-left: 1px solid grey;
+fieldset + fieldset {
+  margin-left: .5em;
+}
+fieldset button,
+fieldset input,
+fieldset select {
+  border: none;
+}
+fieldset button + button,
+fieldset input + input,
+fieldset input + button,
+fieldset input + select,
+fieldset select + input,
+fieldset select + select,
+fieldset select + button,
+fieldset button + select,
+fieldset button + input {
+  border-left: 1px dotted;
 }
 
 button, [role=button], input, select {
@@ -86,50 +103,30 @@ button, [role=button], input, select {
   line-height: inherit;
   padding: .15em .5em;
 }
-fieldset button,
-fieldset [role=button],
-fieldset input,
-fieldset select {
-  border-right: none;
-}
 nav button, nav [role=button], nav input {
   font-size: 1em;
 }
 
 button, [role=button], select {
-  background: ivory;
-  border-color: ivory;
-  color: black;
+  background: dimgray;
+  color: ivory;
   cursor: pointer;
   font-variant: small-caps;
   text-decoration: none;
   user-select: none;
 }
 button:disabled, select:disabled {
+  border-color: ivory;
   color: darkgray;
-}
-fieldset button + button,
-fieldset [role=button] + [role=button],
-fieldset [role=button] + button,
-fieldset [role=button] + select,
-fieldset select + [role=button],
-fieldset select + select,
-fieldset select + button,
-fieldset button + select,
-fieldset button + [role=button] {
-  border-left: 1px dotted black !important;
 }
 button:hover, [role=button]:hover {
   background: gold;
-  border-color: gold;
 }
 button:disabled:hover{
-  background: ivory;
-  border-color: ivory;
+  background: dimgray;
 }
 button[name=trash]:hover, button[name=purge]:hover {
   background: red;
-  border-color: red;
   color: white;
 }
 
@@ -137,8 +134,7 @@ input {
   background: transparent;
 }
 input:focus {
-  background: black;
-  border-color: gold;
+  background: dimgray;
 }
 
 select[name=extension] {
@@ -192,10 +188,10 @@ article.ck-focused {
 /***/
 
 .alertify-notifier .ajs-message {
-  background: darkgray;
-  border: none;
+  background: black;
+  border: 1px solid;
   border-radius: 0;
-  color: black;
+  color: ivory;
   display: inline-block;
   font-variant: small-caps;
   padding: .5em .62em .5em .5em !important;
@@ -203,7 +199,8 @@ article.ck-focused {
   white-space: nowrap;
 }
 .alertify-notifier .ajs-message.ajs-success {
-  background: ivory;
+  background: dimgray;
+  color: white;
 }
 .alertify-notifier .ajs-message.ajs-error {
   background: red;
@@ -211,6 +208,7 @@ article.ck-focused {
 }
 .alertify-notifier .ajs-message.ajs-warning {
   background: gold;
+  color: white;
 }
 
 .alertify-notifier .ajs-message:before {
