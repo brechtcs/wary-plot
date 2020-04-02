@@ -1,0 +1,19 @@
+html {
+  font-size: 11pt;
+  line-height: 2;
+}
+body {
+  padding: 2.54cm 1.8cm;
+}
+
+main > header, form, .ck-body-wrapper, .alertify-notifier {
+  display: none !important;
+}
+
+h1, h2, h3, h4, blockquote, p {
+  margin: 1.61em 0;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}

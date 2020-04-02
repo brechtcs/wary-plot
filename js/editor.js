@@ -38,6 +38,9 @@ async function edit (err, name) {
     localStorage.setItem(key, content)
     alertify.success('Draft saved!')
   }, 1500))
+
+  var style = document.querySelector('style')
+  style.setAttribute('media', 'screen')
 }
 
 function actions (key, name, editor) {
