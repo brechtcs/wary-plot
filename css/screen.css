@@ -73,11 +73,8 @@ form {
 fieldset {
   border: 1px solid;
   display: inline-flex;
-  margin: 0;
+  margin: 0 .5em .5em 0;
   padding: 0;
-}
-fieldset + fieldset {
-  margin-left: .5em;
 }
 fieldset button,
 fieldset input,
