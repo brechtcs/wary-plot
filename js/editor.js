@@ -53,6 +53,9 @@ function actions (key, name, editor) {
   el.name.value = name
 
   el.name.addEventListener('input', debounce(function () {
+    if (el.name.value === name) {
+      return
+    }
     var prev = key
     name = el.name.value
     key = encodeURIComponent(name)
