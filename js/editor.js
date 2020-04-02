@@ -1,3 +1,5 @@
+var AUTOSAVE_MS = 1200
+
 var settings = {
   placeholder: 'Start drafting...',
   toolbar: [
@@ -37,7 +39,7 @@ async function edit (err, name) {
     content = editor.getData()
     localStorage.setItem(key, content)
     alertify.message('Draft saved.')
-  }, 1500))
+  }, AUTOSAVE_MS))
 
   var style = document.querySelector('style')
   style.setAttribute('media', 'screen')
@@ -63,7 +65,7 @@ function actions (key, name, editor) {
     localStorage.removeItem(prev)
     alertify.success('Draft renamed!')
     window.history.pushState({}, '', '/editor?draft=' + key)
-  }, 3000))
+  }, AUTOSAVE_MS))
 
   el.trash.addEventListener('click', function () {
     sessionStorage.setItem(key, editor.getData())
