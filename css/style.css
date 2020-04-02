@@ -85,6 +85,7 @@ fieldset > * + * {
 button, [role=button], input, select {
   border: 1px solid;
   font-size: .8em;
+  height: 2em;
   line-height: inherit;
   padding: .15em .5em;
 }
@@ -106,6 +107,12 @@ button, [role=button], select {
   font-variant: small-caps;
   text-decoration: none;
   user-select: none;
+}
+button:disabled, select:disabled {
+  color: darkgray;
+}
+button:disabled:hover, select:disabled:hover {
+  background: ivory;
 }
 fieldset button + button,
 fieldset [role=button] + [role=button],
@@ -136,6 +143,10 @@ input:focus {
   border-color: gold;
 }
 
+select[name=extension] {
+  font-variant: normal;
+}
+
 /**
  * CKEditor styling:
  */
@@ -148,7 +159,7 @@ body {
   --ck-color-toolbar-background: black;
   --ck-color-toolbar-border: ivory;
   --ck-color-button-default-hover-background: gold;
-  --ck-color-button-on-background: dimgrey;
+  --ck-color-button-on-background: dimgray;
   --ck-color-button-on-hover-background: darkgray;
   --ck-color-dropdown-panel-background: black;
   --ck-color-input-background: black;

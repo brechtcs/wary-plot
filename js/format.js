@@ -1,8 +1,8 @@
-window.format = async function (content, { type, doc }) {
-  switch (type.toLowerCase()) {
+window.format = async function (content, { extension, doc }) {
+  switch (extension.toLowerCase()) {
     case 'html':
       return doc ? formatHtmlDoc(content) : formatHtmlData(content)
-    case 'word':
+    case 'docx':
       return formatWord(content)
     default:
       throw new Error('Unsupported format: ' + type)

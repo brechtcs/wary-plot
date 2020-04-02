@@ -36,108 +36,78 @@ async function edit (err, name) {
   editor.model.document.on('change:data', debounce(function () {
     content = editor.getData()
     localStorage.setItem(key, content)
-    alertify.success('Saved!')
+    alertify.success('Draft saved!')
   }, 1500))
 }
 
 function actions (key, name, editor) {
-  var form = document.actions
-  form.elements.name.value = name
-
-  var role = 'button'
-  var download = h('a', { role, download: name + '.docx' }, 'Download')
-  var mailto = h('a', { role }, 'Email')
-  var options = h('select', {}, [
-    h('option', {}, 'HTML'),
-    h('option', {}, 'Word')
-  ])
+  var form = document.draft
+  var el = form.elements
 
   var content = ''
-  var type = 'HTML'
-  options.value = type
+  var extension = 'html'
+  el.extension.value = extension
+  el.name.value = name
 
-  form.elements.rename.addEventListener('click', function () {
+  el.name.addEventListener('input', debounce(function () {
     var prev = key
-    name = form.elements.name.value
+    name = el.name.value
     key = encodeURIComponent(name)
     localStorage.setItem(key, editor.getData())
     localStorage.removeItem(prev)
-    window.location = '/editor?draft=' + key
-  })
+    alertify.success('Draft renamed!')
+    window.history.pushState({}, '', '/editor?draft=' + key)
+  }, 3000))
 
-  form.elements.trash.addEventListener('click', function () {
+  el.trash.addEventListener('click', function () {
     sessionStorage.setItem(key, editor.getData())
     localStorage.removeItem(key)
     window.location = '/'
   })
 
-  options.addEventListener('change', function () {
-    switch (options.value.toLowerCase()) {
+  el.extension.addEventListener('change', function () {
+    extension = el.extension.value
+
+    switch (extension.toLowerCase()) {
       case 'html':
-        download.removeAttribute('href')
-        mailto.removeAttribute('hidden')
+        el.mailto.removeAttribute('disabled')
         break
-      case 'word':
-        download.removeAttribute('href')
-        mailto.setAttribute('hidden', true)
+      case 'docx':
+        el.mailto.setAttribute('disabled', true)
         break
     }
   })
 
-  download.addEventListener('click', async function (event) {
-    if (download.href) {
-      return
-    }
-    event.stopPropagation()
-    event.preventDefault()
+  el.download.addEventListener('click', async function () {
     content = editor.getData()
-    type = options.value
+    name = el.name.value
+    extension = el.extension.value
 
     try {
-      var data = await format(content, { type })
-      download.href = data
-      download.click()
-      reset(download, editor)
+      var download = name + '.' + extension
+      var href = await format(content, { extension })
+      h('a', { href, download }).click()
     } catch (err) {
       alertify.error(err.message)
       console.error(err)
     }
   })
 
-  mailto.addEventListener('click', async function (event) {
-    if (mailto.href) {
-      return
-    }
-    event.stopPropagation()
-    event.preventDefault()
+  el.mailto.addEventListener('click', async function () {
     content = editor.getData()
-    type = options.value
+    extension = el.extension.value
 
     try {
-      var data = await format(content, { type, doc: true })
-      mailto.href = 'mailto:?subject=' + key + '&body=' + encodeURIComponent(data)
-      mailto.click()
-      reset(mailto, editor)
+      var data = await format(content, { extension, doc: true })
+      var href = 'mailto:?subject=' + key + '&body=' + encodeURIComponent(data)
+      h('a', { href }).click()
     } catch (err) {
       alertify.error(err.message)
       console.error(err)
     }
   })
 
-  var fieldset = h('fieldset')
-  fieldset.appendChild(options)
-  fieldset.appendChild(download)
-  fieldset.appendChild(mailto)
-  form.appendChild(fieldset)
   form.style.display = 'block'
-}
-
-function reset (link, editor) {
-  editor.model.document.once('change:data', function () {
-    if (link.href) {
-      link.removeAttribute('href')
-    }
-  })
 }
 
 function open (done) {

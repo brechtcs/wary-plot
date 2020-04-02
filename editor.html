@@ -19,10 +19,17 @@
       <header>
         <h1><a href="/">Drafts</a></h1>
       </header>
-      <form name="actions" method="POST">
+      <form name="draft" method="POST">
         <fieldset>
           <input type="text" name="name">
-          <button type="button" name="rename">Rename</button>
+          <select name="extension">
+            <option value="html">.html</option>
+            <option value="docx">.docx</option>
+          </select>
+        </fieldset>
+        <fieldset>
+          <button type="button" name="mailto">Email</button>
+          <button type="button" name="download">Download</button>
           <button type="button" name="trash">Trash</button>
         </fieldset>
       </form>
