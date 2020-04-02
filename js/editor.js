@@ -63,7 +63,6 @@ function actions (key, name, editor) {
     key = encodeURIComponent(name)
     localStorage.setItem(key, editor.getData())
     localStorage.removeItem(prev)
-    alertify.success('Draft renamed!')
     window.history.pushState({}, '', '/editor?draft=' + key)
   }, AUTOSAVE_MS))
 
