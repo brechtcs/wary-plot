@@ -15,10 +15,13 @@ async function formatHtmlData (content) {
 }
 
 async function formatHtmlDoc (content) {
+  var style = await getStyle()
+
   return `<!doctype html>
     <html>
       <head>
         <meta charset="utf-8">
+        <style>${style}</style>
       </head>
       <body>${content}</body>
     </html>
@@ -37,4 +40,9 @@ async function formatWord (content) {
 
     reader.readAsDataURL(docx)
   })
+}
+
+async function getStyle () {
+  var res = await fetch('/css/common.css')
+  return res.text()
 }
