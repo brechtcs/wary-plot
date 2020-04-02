@@ -10,8 +10,8 @@ main > header, form, .ck-body-wrapper, .alertify-notifier {
   display: none !important;
 }
 
-h1, h2, h3, h4, blockquote, p {
-  margin: 1.61em 0;
+blockquote {
+  padding: 0 2.5em;
 }
 a {
   color: inherit;
