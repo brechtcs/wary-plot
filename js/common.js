@@ -37,3 +37,9 @@ window.debounce = function (fn, ms) {
     }, ms)
   }
 }
+
+/**
+ * Alertify configuration
+ */
+alertify.defaults.notifier.delay = 3
+alertify.defaults.notifier.position = 'top-left'

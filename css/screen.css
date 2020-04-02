@@ -149,9 +149,8 @@ select[name=extension] {
   cursor: default;
 }
 
-/**
- * CKEditor styling:
- */
+/***/
+
 body {
   --ck-border-radius: 0;
   --ck-color-focus-border: gold;
@@ -188,4 +187,42 @@ article.ck-focused {
 
 .ck-balloon-panel {
   transform: translate(-1em, 1em);
+}
+
+/***/
+
+.alertify-notifier .ajs-message {
+  background: darkgray;
+  border: none;
+  border-radius: 0;
+  color: black;
+  display: inline-block;
+  font-variant: small-caps;
+  padding: .5em .62em .5em .5em !important;
+  width: auto !important;
+  white-space: nowrap;
+}
+.alertify-notifier .ajs-message.ajs-success {
+  background: ivory;
+}
+.alertify-notifier .ajs-message.ajs-error {
+  background: red;
+  color: white;
+}
+.alertify-notifier .ajs-message.ajs-warning {
+  background: gold;
+}
+
+.alertify-notifier .ajs-message:before {
+  content: '🛈';
+  padding-right: .5em;
+}
+.alertify-notifier .ajs-message.ajs-success:before {
+  content: '☑';
+}
+.alertify-notifier .ajs-message.ajs-warning:before {
+  content: '⚠';
+}
+.alertify-notifier .ajs-message.ajs-error:before {
+  content: '☒';
 }
