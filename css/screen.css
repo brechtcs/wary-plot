@@ -1,4 +1,5 @@
 * {
+  border: none;
   border-radius: 0;
   box-sizing: border-box;
   color: inherit;
@@ -74,40 +75,28 @@ ul > li:before {
   content: '· ';
 }
 
-fieldset {
+fieldset, nav {
   border: 1px solid;
   display: inline-flex;
   margin: 0 .5em .5em 0;
   padding: 0;
 }
-fieldset button,
-fieldset input,
-fieldset select {
-  border: none;
-}
-fieldset button + button,
-fieldset input + input,
-fieldset input + button,
-fieldset input + select,
-fieldset select + input,
-fieldset select + select,
-fieldset select + button,
-fieldset button + select,
-fieldset button + input {
+fieldset > * + *,
+nav > * + * {
   border-left: 1px dotted;
+}
+fieldset {
+  font-size: .8em;
+  overflow: hidden;
+}
+fieldset, button, [role=button], input, select {
+  height: 1.8em;
+  line-height: inherit;
 }
 
 button, [role=button], input, select {
-  border: 1px solid;
-  font-size: .8em;
-  height: 2em;
-  line-height: inherit;
   padding: .15em .5em;
 }
-nav button, nav [role=button], nav input {
-  font-size: 1em;
-}
-
 button, [role=button], select {
   background: dimgray;
   color: ivory;
@@ -116,19 +105,22 @@ button, [role=button], select {
   text-decoration: none;
   user-select: none;
 }
-button:disabled, select:disabled {
+button:disabled, [role=button].disabled, select:disabled {
   border-color: ivory;
   color: darkgray;
 }
 button:hover, [role=button]:hover {
   background: gold;
 }
-button:disabled:hover{
+button:disabled:hover, [role=button].disabled:hover {
   background: dimgray;
 }
 button[name=trash]:hover, button[name=purge]:hover {
   background: red;
   color: white;
+}
+[role=button]:hover {
+  text-decoration: none;
 }
 
 input {
@@ -142,7 +134,7 @@ select[name=extension] {
   font-variant: normal;
 }
 
-:disabled {
+:disabled, .disabled {
   cursor: default;
 }
 

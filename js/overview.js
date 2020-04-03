@@ -12,13 +12,10 @@ ready(function () {
 
   if (deleted.length) {
     var trash = h('ul', {}, deleted.map(link.bind(null, 'trash')))
-    var empty = h('button', { type: 'button', name: 'purge' }, 'Empty Trash')
-    empty.addEventListener('click', purge)
-
     main.appendChild(h('hr'))
     main.appendChild(h('p', {}, 'Need to recover something from the trash?'))
     main.appendChild(trash)
-    main.appendChild(empty)
+    main.appendChild(empty(deleted))
   }
 })
 
@@ -28,10 +25,17 @@ function link (page, key) {
   return h('li', {}, h('a', { href }, name))
 }
 
-function purge () {
-  var name = 'all trash'
-  var check = prompt(`Purge ${name}? Type 'purge' to confirm.`)
-  if (check.toLowerCase() !== 'purge') return alert(`Purge not confirmed, ${name} was kept`)
-  deleted.forEach(sessionStorage.removeItem.bind(sessionStorage))
-  window.location.reload()
+function empty (deleted) {
+  var button = h('button', { type: 'button', name: 'purge' }, 'Empty Trash')
+  var fieldset = h('fieldset', {}, [button])
+
+  button.addEventListener('click', function purge () {
+    var name = 'all trash'
+    var check = prompt(`Purge ${name}? Type 'purge' to confirm.`)
+    if (check.toLowerCase() !== 'purge') return alert(`Purge not confirmed, ${name} was kept`)
+    deleted.forEach(sessionStorage.removeItem.bind(sessionStorage))
+    window.location.reload()
+  })
+
+  return fieldset
 }
