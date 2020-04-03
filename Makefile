@@ -1,10 +1,12 @@
 .PHONY: all test
 
-alertify := vendor/alertify.css vendor/alertify.js
-ckeditor := vendor/ckeditor.js
-html-docx := vendor/html-docx.js
+vendor += vendor/alertify.css
+vendor += vendor/alertify.js
+vendor += vendor/ckeditor.js
+vendor += vendor/html-docx.js
+vendor += vendor/stimulus.js
 
-all: $(alertify) $(ckeditor) $(html-docx)
+all: $(vendor)
 
 test: all
 	surge . draft-pamphlets.surge.sh

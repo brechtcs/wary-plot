@@ -1,0 +1,1 @@
+https://unpkg.com/stimulus@1.1.1/dist/stimulus.umd.js

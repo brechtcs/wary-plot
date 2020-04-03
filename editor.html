@@ -13,30 +13,35 @@
     <script src="/vendor/ckeditor.js"></script>
     <script src="/vendor/alertify.js"></script>
     <script src="/vendor/html-docx.js"></script>
+    <script src="/vendor/stimulus.js"></script>
     <script src="/js/common.js"></script>
     <script src="/js/format.js"></script>
     <script src="/js/editor.js"></script>
+    <script src="/js/controllers/mailto.js"></script>
   </head>
   <body>
-    <main>
+    <main data-controller="mailto">
       <header>
         <h1><a href="/">Drafts</a></h1>
       </header>
       <form name="draft" method="POST">
         <fieldset>
-          <input type="text" name="name">
-          <select name="extension">
+          <input type="text" name="name" data-target="mailto.subject">
+          <select name="extension" data-target="mailto.type">
             <option value="html">.html</option>
             <option value="docx">.docx</option>
           </select>
         </fieldset>
         <fieldset>
-          <button type="button" name="mailto">Email</button>
+          <button type="button"
+            data-action="click->mailto#submit"
+            data-target="mailto.button">Email
+          </button>
           <button type="button" name="download">Download</button>
           <button type="button" name="trash">Trash</button>
         </fieldset>
       </form>
-      <article></article>
+      <article data-target="mailto.body"></article>
     </main>
   </body>
 </html>

@@ -72,19 +72,6 @@ function actions (key, name, editor) {
     window.location = '/'
   })
 
-  el.extension.addEventListener('change', function () {
-    extension = el.extension.value
-
-    switch (extension.toLowerCase()) {
-      case 'html':
-        el.mailto.removeAttribute('disabled')
-        break
-      case 'docx':
-        el.mailto.setAttribute('disabled', true)
-        break
-    }
-  })
-
   el.download.addEventListener('click', async function () {
     content = editor.getData()
     name = el.name.value
@@ -99,22 +86,6 @@ function actions (key, name, editor) {
       console.error(err)
     }
   })
-
-  el.mailto.addEventListener('click', async function () {
-    content = editor.getData()
-    extension = el.extension.value
-
-    try {
-      var data = await format(content, { extension, doc: true })
-      var href = 'mailto:?subject=' + key + '&body=' + encodeURIComponent(data)
-      h('a', { href }).click()
-    } catch (err) {
-      alertify.error(err.message)
-      console.error(err)
-    }
-  })
-
-  form.style.display = 'block'
 }
 
 function open (done) {
