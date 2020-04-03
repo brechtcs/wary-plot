@@ -21,7 +21,7 @@ var settings = {
 
 async function edit (err, name) {
   if (err) {
-    alertify.error(err.message)
+    app.error(err.message)
     return console.error(err)
   }
 
@@ -38,7 +38,7 @@ async function edit (err, name) {
   editor.model.document.on('change:data', debounce(function () {
     content = editor.getData()
     localStorage.setItem(key, content)
-    alertify.message('Draft saved.')
+    app.message('Draft saved.')
   }, AUTOSAVE_MS))
 
   var style = document.querySelector('style')
@@ -64,6 +64,7 @@ function actions (key, name, editor) {
     localStorage.setItem(key, editor.getData())
     localStorage.removeItem(prev)
     window.history.pushState({}, '', '/editor?draft=' + key)
+    app.success('Draft renamed.')
   }, AUTOSAVE_MS))
 
   el.trash.addEventListener('click', function () {
@@ -82,7 +83,7 @@ function actions (key, name, editor) {
       var href = await format(content, { extension })
       h('a', { href, download }).click()
     } catch (err) {
-      alertify.error(err.message)
+      app.error(err.message)
       console.error(err)
     }
   })

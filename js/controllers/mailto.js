@@ -20,7 +20,7 @@ class MailtoController extends Stimulus.Controller {
       var mailto = h('a', { href, target })
       mailto.click()
     } catch (err) {
-      alertify.error(err.message)
+      app.error(err.message)
       console.error(err)
     }
   }
