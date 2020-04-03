@@ -66,8 +66,12 @@ hr {
   margin: 2em 0;
 }
 
-form {
-  display: none;
+ul {
+  list-style: none;
+  padding: 0;
+}
+ul > li:before {
+  content: '· ';
 }
 
 fieldset {
