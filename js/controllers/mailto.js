@@ -1,5 +1,3 @@
-var app = Stimulus.Application.start()
-
 class MailtoController extends Stimulus.Controller {
 
   static get targets () {
