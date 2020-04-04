@@ -130,7 +130,7 @@ input:focus {
   background: dimgray;
 }
 
-select[name=extension] {
+select.extension {
   font-variant: normal;
 }
 

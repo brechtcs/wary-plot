@@ -50,8 +50,6 @@ function actions (key, name, editor) {
   var el = form.elements
 
   var content = ''
-  var extension = 'html'
-  el.extension.value = extension
   el.name.value = name
 
   el.name.addEventListener('input', debounce(function () {
@@ -71,21 +69,6 @@ function actions (key, name, editor) {
     sessionStorage.setItem(key, editor.getData())
     localStorage.removeItem(key)
     window.location = '/'
-  })
-
-  el.download.addEventListener('click', async function () {
-    content = editor.getData()
-    name = el.name.value
-    extension = el.extension.value
-
-    try {
-      var download = name + '.' + extension
-      var href = await format(content, { extension })
-      h('a', { href, download }).click()
-    } catch (err) {
-      app.error(err.message)
-      console.error(err)
-    }
   })
 }
 
