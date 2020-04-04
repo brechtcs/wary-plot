@@ -117,7 +117,7 @@ button:hover, [role=button]:hover {
 button:disabled:hover, [role=button].disabled:hover {
   background: dimgray;
 }
-button[name=trash]:hover, button[name=purge]:hover {
+button.danger:hover, button[name=purge]:hover {
   background: red;
   color: white;
 }

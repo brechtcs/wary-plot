@@ -16,18 +16,20 @@
     <script src="/vendor/stimulus.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/util.js"></script>
-    <script src="/js/editor.js"></script>
+    <script src="/js/controllers/draft.js"></script>
     <script src="/js/controllers/download.js"></script>
     <script src="/js/controllers/mailto.js"></script>
   </head>
   <body>
-    <main data-controller="download mailto">
+    <main data-controller="draft download mailto">
       <header>
         <h1><a href="/">Drafts</a></h1>
       </header>
       <form name="draft">
         <fieldset>
-          <input type="text" name="name" data-target="download.name mailto.subject">
+          <input type="text"
+                 data-target="draft.name download.name mailto.subject"
+                 data-action="input->draft#rename">
           <select data-target="download.type mailto.type" class="extension">
             <option value="html">.html</option>
             <option value="docx">.docx</option>
@@ -36,10 +38,10 @@
         <fieldset>
           <button type="button" data-action="mailto#submit" data-target="mailto.button">Email</button>
           <button type="button" data-action="download#start">Download</button>
-          <button type="button" name="trash">Trash</button>
+          <button type="button" data-action="draft#trash" class="danger">Trash</button>
         </fieldset>
       </form>
-      <article data-target="download.content mailto.body"></article>
+      <article data-target="draft.content download.content mailto.body"></article>
     </main>
   </body>
 </html>
