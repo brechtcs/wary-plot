@@ -30,7 +30,9 @@
           <input type="text"
                  data-target="draft.name download.name mailto.subject"
                  data-action="input->draft#rename">
-          <select data-target="download.type mailto.type" class="extension">
+          <select class="extension"
+                  data-target="download.type mailto.type"
+                  data-action="mailto#connect">
             <option value="html">.html</option>
             <option value="docx">.docx</option>
           </select>

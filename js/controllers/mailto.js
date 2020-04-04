@@ -5,12 +5,11 @@ class MailtoController extends Stimulus.Controller {
   }
 
   connect () {
-    this.typeListener = onTypeChange.bind(this)
-    this.typeTarget.addEventListener('change', this.typeListener)
-  }
-
-  disconnect () {
-    this.typeTarget.removeEventListener('change', this.typeListener)
+    if (this.type === 'html') {
+      this.buttonTarget.removeAttribute('disabled')
+    } else {
+      this.buttonTarget.setAttribute('disabled', true)
+    }
   }
 
   submit (event) {
@@ -35,13 +34,9 @@ class MailtoController extends Stimulus.Controller {
   get subject () {
     return this.subjectTarget.value
   }
-}
 
-function onTypeChange (e) {
-  if (e.target.value === 'html') {
-    this.buttonTarget.removeAttribute('disabled')
-  } else {
-    this.buttonTarget.setAttribute('disabled', true)
+  get type () {
+    return this.typeTarget.value
   }
 }
 
