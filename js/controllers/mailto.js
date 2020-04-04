@@ -17,8 +17,7 @@ class MailtoController extends Stimulus.Controller {
     try {
       var href = this.href
       var target = '_blank'
-      var mailto = h('a', { href, target })
-      mailto.click()
+      h('a', { href, target }).click()
     } catch (err) {
       app.error(err.message)
       console.error(err)
