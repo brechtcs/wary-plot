@@ -77,9 +77,13 @@ ul > li:before {
 
 fieldset, nav {
   border: 1px solid;
-  display: inline-flex;
+  display: inline-block;
   margin: 0 .5em .5em 0;
   padding: 0;
+}
+fieldset > *,
+nav > * {
+  float: left;
 }
 fieldset > * + *,
 nav > * + * {
@@ -87,14 +91,12 @@ nav > * + * {
 }
 fieldset {
   font-size: .8em;
-  overflow: hidden;
-}
-fieldset, button, [role=button], input, select {
-  height: 1.8em;
-  line-height: inherit;
 }
 
 button, [role=button], input, select {
+  font-size: inherit;
+  line-height: inherit;
+  height: 1.8em;
   padding: .15em .5em;
 }
 button, [role=button], select {
