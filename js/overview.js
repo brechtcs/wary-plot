@@ -19,9 +19,8 @@ ready(function () {
   }
 })
 
-function link (page, key) {
-  var name = decodeURIComponent(key)
-  var href = `/${page}?draft=${key}`
+function link (page, name) {
+  var href = `/${page}?draft=${encodeURIComponent(name)}`
   return h('li', {}, h('a', { href }, name))
 }
 

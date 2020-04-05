@@ -8,23 +8,22 @@ class TrashController extends Stimulus.Controller {
     try {
       this.url = new URL(window.location)
       this.content = sessionStorage.getItem(this.key)
-      this.name = decodeURIComponent(this.key)
+      this.name = this.key
     } catch (err) {
       app.error(err)
     }
   }
 
   restore () {
-    var key = encodeURIComponent(this.name)
-    localStorage.setItem(key, this.content)
+    localStorage.setItem(this.name, this.content)
     sessionStorage.removeItem(this.key)
-    window.location = '/editor?draft=' + key
+    window.location = '/editor?draft=' + encodeURIComponent(this.name)
   }
 
   purge () {
-    this.name = decodeURIComponent(this.key)
-    var check = prompt(`Purge ${name}? Type 'purge' to confirm.`)
-    if (check.toLowerCase() !== 'purge') return alert(`Purge not confirmed, ${name} was kept`)
+    this.name = this.key
+    var check = prompt(`Purge ${this.name}? Type 'purge' to confirm.`)
+    if (check.toLowerCase() !== 'purge') return alert(`Purge not confirmed, ${this.name} was kept`)
     sessionStorage.removeItem(this.key)
     window.location = '/'
   }

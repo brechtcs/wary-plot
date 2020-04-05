@@ -13,7 +13,7 @@ class DraftController extends Stimulus.Controller {
   async connect () {
     try {
       this.url = new URL(window.location)
-      this.nameTarget.value = this.name
+      this.name = this.key
       this.editor = await InlineEditor.create(this.contentTarget, this.settings)
       this.editor.setData(localStorage.getItem(this.key) || '')
       this.editor.model.document.on('change:data', debounce(() => {
@@ -35,18 +35,18 @@ class DraftController extends Stimulus.Controller {
   }
 
   get name () {
-    return decodeURIComponent(this.key)
+    return this.nameTarget.value
   }
 
   set name (name) {
-    this.key = encodeURIComponent(name)
+    this.nameTarget.value = name
   }
 
   get key () {
     if (this.url.searchParams.has('draft')) {
       return this.url.searchParams.get('draft')
     }
-    this.name = prompt('Name your draft:')
+    this.key = prompt('Name your draft:')
     return this.key
   }
 
@@ -87,10 +87,8 @@ class DraftController extends Stimulus.Controller {
 
 function rename () {
   var prev = this.key
-  var name = this.nameTarget.value
-  var key = encodeURIComponent(name)
-  if (this.key === key) return
-  else this.key = key
+  if (this.name === this.key) return
+  else this.key = this.name
 
   localStorage.setItem(this.key, this.editor.getData())
   localStorage.removeItem(prev)
