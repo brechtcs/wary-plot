@@ -10,8 +10,7 @@ class DownloadController extends Stimulus.Controller {
       var href = await format(this.content, this.type)
       h('a', { href, download }).click()
     } catch (err) {
-      app.error(err.message)
-      console.error(err)
+      app.error(err)
     }
   }
 

@@ -10,8 +10,7 @@ class TrashController extends Stimulus.Controller {
       this.content = sessionStorage.getItem(this.key)
       this.name = decodeURIComponent(this.key)
     } catch (err) {
-      app.error(err.message)
-      console.error(err)
+      app.error(err)
     }
   }
 

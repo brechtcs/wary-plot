@@ -24,8 +24,7 @@ class DraftController extends Stimulus.Controller {
       document.title = this.name + ' · Drafts'
       document.querySelector('style').setAttribute('media', 'screen')
     } catch (err) {
-      app.error(err.message)
-      console.error(err)
+      app.error(err)
     }
   }
 
