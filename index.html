@@ -10,20 +10,28 @@
     <link rel="stylesheet" href="/vendor/alertify.css" media="screen">
     <link rel="stylesheet" href="/css/screen.css">
     <script src="/vendor/alertify.js"></script>
+    <script src="/vendor/stimulus.js"></script>
     <script src="/js/app.js"></script>
     <script src="/js/util.js"></script>
-    <script src="/js/overview.js"></script>
+    <script src="/js/controllers/dialog.js"></script>
+    <script src="/js/controllers/browse.js"></script>
   </head>
-  <body>
-    <main>
-      <header>
-        <h1>Drafts</h1>
-      </header>
+  <body data-controller="dialog">
+    <main data-target="dialog.main">
+      <h1>Drafts</h1>
       <nav>
-        <a href="/editor" role="button">+ new draft</a>
+        <a href="/editor" role="button">+ New</a>
+        <button type="button" data-action="dialog#browse">Browse</button>
       </nav>
       <p>Drafts are stored in your browser's local storage. This means that they will not automatically synchronize with a server or any other device. It also means that <strong>you might lose your drafts</strong> when the browser cache is cleared!</p>
       <p>Use the download feature to store important drafts safely on your file system.</p>
     </main>
+    <dialog data-target="dialog.browse" data-controller="browse">
+      <h1>Your Drafts</h1>
+      <ul data-target="browse.list"></ul>
+      <section class="actions">
+        <button type="button" data-action="dialog#close">Back</button>
+      </section>
+    </dialog>
   </body>
 </html>
