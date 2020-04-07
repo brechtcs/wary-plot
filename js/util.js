@@ -1,12 +1,3 @@
-var readyStates = ['complete', 'interactive']
-
-window.ready = function (cb) {
-  if (readyStates.includes(document.readyState)) {
-    return setTimeout(cb)
-  }
-  document.addEventListener('DOMContentLoaded', cb)
-}
-
 window.h = function (tag, attrs = {}, children = []) {
   children = Array.isArray(children) ? children : [children]
   var el = document.createElement(tag)
