@@ -1,4 +1,4 @@
-var AUTOSAVE_MS = 1700
+var AUTOSAVE_MS = 1100
 
 class DraftController extends Stimulus.Controller {
 
@@ -18,7 +18,7 @@ class DraftController extends Stimulus.Controller {
       this.editor.setData(localStorage.getItem(this.key) || '')
       this.editor.model.document.on('change:data', debounce(() => {
         localStorage.setItem(this.key, this.editor.getData())
-        app.message('Draft saved')
+        app.message('Draft saved.')
       }, AUTOSAVE_MS))
 
       document.title = this.name + ' · Drafts'
@@ -92,7 +92,7 @@ function rename () {
 
   localStorage.setItem(this.key, this.editor.getData())
   localStorage.removeItem(prev)
-  app.success('Draft renamed')
+  app.success('Draft renamed.')
 }
 
 app.register('draft', DraftController)
