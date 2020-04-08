@@ -162,13 +162,13 @@ fieldset {
   font-size: .8em;
 }
 
-button, [role=button], input, label, select {
+button, input, label, select {
   font-size: inherit;
   line-height: inherit;
   height: 1.8em;
   padding: .15em .5em;
 }
-button, [role=button], label, select {
+button, label, select {
   background: dimgray;
   color: ivory;
   cursor: pointer;
@@ -177,14 +177,14 @@ button, [role=button], label, select {
   -moz-user-select: none;
   user-select: none;
 }
-button:disabled, [role=button].disabled, select:disabled {
+button:disabled, select:disabled {
   border-color: ivory;
   color: darkgray;
 }
-button:hover, [role=button]:hover {
+button:hover {
   background: gold;
 }
-button:disabled:hover, [role=button].disabled:hover {
+button:disabled:hover {
   background: dimgray;
 }
 button.cancel {
@@ -193,9 +193,6 @@ button.cancel {
 button.cancel:hover {
   background: ivory;
   color: black;
-}
-[role=button]:hover {
-  text-decoration: none;
 }
 
 input {
