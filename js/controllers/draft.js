@@ -46,8 +46,7 @@ class DraftController extends Stimulus.Controller {
     if (this.url.searchParams.has('draft')) {
       return this.url.searchParams.get('draft')
     }
-    this.key = prompt('Name your draft:')
-    return this.key
+    throw new Error('No draft key was given')
   }
 
   set key (key) {

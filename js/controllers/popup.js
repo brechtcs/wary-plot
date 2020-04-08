@@ -14,6 +14,11 @@ class PopupController extends Stimulus.Controller {
     this.showDialog('browse')
   }
 
+  showCreateDialog () {
+    this.loadController('create')
+    this.showDialog('create')
+  }
+
   async showDialog (partial) {
     if (partial !== this.data.get('current')) {
       await this.loadPartial(partial).catch(app.error)

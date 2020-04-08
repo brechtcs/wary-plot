@@ -82,6 +82,9 @@ dialog aside > * + * {
 dialog .actions {
   text-align: right;
 }
+dialog .actions > * + * {
+  margin-left: .2em;
+}
 
 dialog.alert {
   background: dimgray;
@@ -159,13 +162,13 @@ fieldset {
   font-size: .8em;
 }
 
-button, [role=button], input, select {
+button, [role=button], input, label, select {
   font-size: inherit;
   line-height: inherit;
   height: 1.8em;
   padding: .15em .5em;
 }
-button, [role=button], select {
+button, [role=button], label, select {
   background: dimgray;
   color: ivory;
   cursor: pointer;
@@ -184,6 +187,13 @@ button:hover, [role=button]:hover {
 button:disabled:hover, [role=button].disabled:hover {
   background: dimgray;
 }
+button.cancel {
+  background: black;
+}
+button.cancel:hover {
+  background: ivory;
+  color: black;
+}
 [role=button]:hover {
   text-decoration: none;
 }
@@ -195,7 +205,7 @@ input:focus {
   background: dimgray;
 }
 
-select.extension {
+label.extension, select.extension {
   font-variant: normal;
 }
 
