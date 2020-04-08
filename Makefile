@@ -3,6 +3,7 @@
 vendor += vendor/ckeditor.js
 vendor += vendor/html-docx.js
 vendor += vendor/stimulus.js
+vendor += vendor/turbolinks.js
 
 all: $(vendor)
 

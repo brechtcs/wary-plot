@@ -5,7 +5,7 @@ class CreateController extends Stimulus.Controller {
   }
 
   confirm () {
-    window.location = `/editor?draft=${this.param}`
+    Turbolinks.visit(`/editor?draft=${this.param}`)
   }
 
   get param () {

@@ -31,7 +31,7 @@ class DraftController extends Stimulus.Controller {
   trash () {
     sessionStorage.setItem(this.key, this.editor.getData())
     localStorage.removeItem(this.key)
-    window.location = '/'
+    Turbolinks.visit('/')
   }
 
   get name () {

@@ -17,7 +17,7 @@ class TrashController extends Stimulus.Controller {
   restore () {
     localStorage.setItem(this.name, this.content)
     sessionStorage.removeItem(this.key)
-    window.location = '/editor?draft=' + encodeURIComponent(this.name)
+    Turbolinks.visit('/editor?draft=' + encodeURIComponent(this.name))
   }
 
   purge () {
@@ -25,7 +25,7 @@ class TrashController extends Stimulus.Controller {
     var check = prompt(`Purge ${this.name}? Type 'purge' to confirm.`)
     if (check.toLowerCase() !== 'purge') return alert(`Purge not confirmed, ${this.name} was kept`)
     sessionStorage.removeItem(this.key)
-    window.location = '/'
+    Turbolinks.visit('/')
   }
 
   get key () {
