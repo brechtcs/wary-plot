@@ -197,6 +197,7 @@ button.cancel:hover {
 
 input {
   background: transparent;
+  max-width: 10em;
 }
 input:focus {
   background: dimgray;
