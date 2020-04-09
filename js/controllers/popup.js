@@ -4,6 +4,10 @@ class PopupController extends Stimulus.Controller {
     return ['backdrop', 'dialog']
   }
 
+  disconnect () {
+    this.closeDialog()
+  }
+
   closeDialog () {
     this.dialogTarget.removeAttribute('open')
     this.backdropTarget.classList.remove('blur')
