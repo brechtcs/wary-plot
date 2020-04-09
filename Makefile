@@ -11,7 +11,9 @@ test: all
 	surge . draft-pamphlets.surge.sh
 
 vendor/%.css: vendor/css/%.txt
-	curl -L "`cat $<`" > $@
+	@echo 'Downloading $@'
+	@curl -s -L "`cat $<`" > $@
 
 vendor/%.js: vendor/js/%.txt
-	curl -L "`cat $<`" > $@
+	@echo 'Downloading $@'
+	@curl -s -L "`cat $<`" | terser -o $@
