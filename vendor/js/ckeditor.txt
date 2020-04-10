@@ -1,1 +1,1 @@
-https://cdn.ckeditor.com/ckeditor5/18.0.0/inline/ckeditor.js
+http://pamphlets-editor.surge.sh/ckeditor.js

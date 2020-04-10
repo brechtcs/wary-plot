@@ -22,7 +22,6 @@ class DraftController extends Stimulus.Controller {
       }, AUTOSAVE_MS))
 
       document.title = this.name + ' · Drafts'
-      document.querySelector('style').setAttribute('media', 'screen')
     } catch (err) {
       app.error(err)
     }
@@ -56,31 +55,8 @@ class DraftController extends Stimulus.Controller {
 
   get settings () {
     return {
-      placeholder: 'Start drafting...',
-      heading: this.heading,
-      toolbar: this.toolbar
+      placeholder: 'Start drafting...'
     }
-  }
-
-  get heading () {
-    return {
-      options: [
-        { model: 'paragraph', title: 'Paragraph' },
-        { model: 'heading1', view: 'h1', title: 'Heading 1' },
-        { model: 'heading2', view: 'h2', title: 'Heading 2' },
-        { model: 'heading3', view: 'h3', title: 'Heading 3' },
-        { model: 'heading4', view: 'h4', title: 'Heading 4' }
-      ]
-    }
-  }
-
-  get toolbar () {
-    return [
-      'heading', '|', 'bold', 'italic', 'link', '|',
-      'bulletedList', 'numberedList', 'blockQuote',
-      'insertTable', 'mediaEmbed', '|',
-      'undo', 'redo'
-    ]
   }
 }
 
