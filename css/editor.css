@@ -36,3 +36,6 @@ article.ck-focused {
 .ck-balloon-panel {
   transform: translate(-1em, 1em);
 }
+.ck-balloon-panel li:before {
+  content: '';
+}
