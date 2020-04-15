@@ -162,7 +162,7 @@ fieldset {
   font-size: .8em;
 }
 
-button, input, label, select {
+button, input, output, label, select {
   font-size: inherit;
   line-height: inherit;
   height: 1.8em;
@@ -171,9 +171,11 @@ button, input, label, select {
 button, label, select {
   background: dimgray;
   color: ivory;
-  cursor: pointer;
   font-variant: small-caps;
   text-decoration: none;
+}
+button, label[for], select {
+  cursor: pointer;
   -moz-user-select: none;
   user-select: none;
 }

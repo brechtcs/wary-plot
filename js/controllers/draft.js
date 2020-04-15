@@ -3,7 +3,7 @@ var AUTOSAVE_MS = 1100
 class DraftController extends Stimulus.Controller {
 
   static get targets () {
-    return ['content', 'name']
+    return ['content', 'name', 'words', 'chars']
   }
 
   initialize () {
@@ -14,17 +14,31 @@ class DraftController extends Stimulus.Controller {
     try {
       this.url = new URL(window.location)
       this.name = this.key
+
+      this.contentTarget.innerHTML = localStorage.getItem(this.key) || ''
       this.editor = await InlineEditor.create(this.contentTarget, this.settings)
-      this.editor.setData(localStorage.getItem(this.key) || '')
       this.editor.model.document.on('change:data', debounce(() => {
         localStorage.setItem(this.key, this.editor.getData())
         app.message('Draft saved.')
       }, AUTOSAVE_MS))
 
+      this.count = this.editor.plugins.get('WordCount')
+      this.count.on('update', () => {
+        this.wordsTarget.innerText = this.count.words
+        this.charsTarget.innerText = this.count.characters
+      })
+
+      this.wordsTarget.innerText = this.count.words
+      this.charsTarget.innerText = this.count.characters
+
       document.title = this.name + ' · Drafts'
     } catch (err) {
       app.error(err)
     }
+  }
+
+  disconnect () {
+    this.editor.destroy()
   }
 
   trash () {
