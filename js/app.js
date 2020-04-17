@@ -42,7 +42,7 @@ function message (text, type) {
 
   var dialog = h('dialog', { open: true }, [
     h('time', {}, `${hours}:${minutes}:${seconds}`),
-    h('pre', {}, text)
+    h('div', {}, text)
   ])
 
   dialog.classList.add('alert')

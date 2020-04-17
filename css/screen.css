@@ -144,6 +144,16 @@ time {
   font-size: .8em;
 }
 
+code, pre {
+  background: rgba(255, 255, 255, .25);
+  border: 1px solid;
+  font-family: monospace;
+}
+pre code {
+  background: unset;
+  border: unset;
+}
+
 fieldset, nav {
   border: 1px solid;
   display: inline-block;

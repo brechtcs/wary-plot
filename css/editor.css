@@ -39,3 +39,11 @@ article.ck-focused {
 .ck-balloon-panel li:before {
   content: '';
 }
+
+.ck.ck-content code, .ck.ck-content pre {
+  background: rgba(255, 255, 255, .25);
+  color: inherit;
+}
+.ck.ck-content pre code {
+  background: unset;
+}
