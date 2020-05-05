@@ -22,6 +22,9 @@ h1, h2, h3, h4, blockquote, p {
 h1, h2, h3, h4 {
   margin-bottom: .2em;
 }
-p {
+h1 + p,
+h2 + p,
+h3 + p,
+h4 + p {
   margin-top: 0;
 }
