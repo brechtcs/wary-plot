@@ -1,1 +1,0 @@
-https://raw.githubusercontent.com/evidenceprime/html-docx-js/v0.3.1/dist/html-docx.js

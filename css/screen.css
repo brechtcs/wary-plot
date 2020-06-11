@@ -222,3 +222,15 @@ label.extension, select.extension {
 :disabled, .disabled {
   cursor: default;
 }
+
+.ProseMirror {
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  outline: none;
+  padding: 0 .5em;
+  white-space: pre-wrap;
+}
+.ProseMirror-focused {
+  background: black;
+  border-color: gold;
+}
