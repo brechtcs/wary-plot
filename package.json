@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "concurrently 'y-webrtc-signaling' 'budo index.js --live'"
+    "install": "browserify src/draft.js -o ui/js/draft.js"
   },
   "dependencies": {
     "pamphlet": "^3.1.0",
@@ -10,7 +10,6 @@
     "yjs": "^13.2.0"
   },
   "devDependencies": {
-    "budo": "^11.6.3",
-    "concurrently": "^5.2.0"
+    "browserify": "^16.5.1"
   }
 }

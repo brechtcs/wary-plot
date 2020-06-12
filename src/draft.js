@@ -4,16 +4,10 @@ var { ySyncPlugin, yCursorPlugin, yUndoPlugin, undo, redo } = require('y-prosemi
 var Pamphlet = require('pamphlet')
 var Y = require('yjs')
 
-var signaling = []
-var local = new URL(location)
-local.protocol = 'ws:'
-local.port= '4444'
-signaling.push(local)
-
 var doc = new Y.Doc()
 var room = 'draft'
 var fragment = doc.getXmlFragment(room)
-var provider = new WebrtcProvider(room, doc, { signaling })
+var provider = new WebrtcProvider(room, doc)
 var name = randomName()
 
 provider.awareness.setLocalStateField('user', { name })
