@@ -13,8 +13,7 @@ var fragment = doc.getXmlFragment('draft')
 var provider = new WebsocketProvider(ws.href, 'draft', doc)
 
 provider.awareness.setLocalStateField('user', {
-  name: prompt("What's your eame?"),
-  color: randomColor()
+  name: Math.round(Math.random() * 200000000).toString(16).padStart(7, '0')
 })
 
 var plugins = [
@@ -30,11 +29,3 @@ var plugins = [
 window.editor = new Pamphlet(window.writer, { plugins })
 window.fragment = fragment
 window.provider = provider
-
-function randomColor () {
-  return '#' + randomHex() + randomHex() + randomHex()
-}
-
-function randomHex () {
-  return Math.round(Math.random() * 255).toString(16)
-}
