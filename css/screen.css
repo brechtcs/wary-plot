@@ -176,6 +176,7 @@ button, input, output, label, select {
   font-size: inherit;
   line-height: inherit;
   height: 1.8em;
+  outline: none;
   padding: .15em .5em;
 }
 button, label, select {
@@ -264,7 +265,6 @@ label.extension, select.extension {
   line-height: normal;
   padding-left: 2px;
   padding-right: 2px;
-  text-transform: uppercase;
   user-select: none;
   white-space: nowrap;
 }

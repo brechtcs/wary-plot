@@ -11,10 +11,9 @@ ws.port= '1234'
 var doc = new Y.Doc()
 var fragment = doc.getXmlFragment('draft')
 var provider = new WebsocketProvider(ws.href, 'draft', doc)
+var name = randomName()
 
-provider.awareness.setLocalStateField('user', {
-  name: Math.round(Math.random() * 200000000).toString(16).padStart(7, '0')
-})
+provider.awareness.setLocalStateField('user', { name })
 
 var plugins = [
   ySyncPlugin(fragment),
@@ -26,6 +25,17 @@ var plugins = [
   })
 ]
 
+window.username.setAttribute('placeholder', name)
+window.username.addEventListener('input', event => {
+  provider.awareness.setLocalStateField('user', { name: event.target.value || name })
+})
+
 window.editor = new Pamphlet(window.writer, { plugins })
 window.fragment = fragment
 window.provider = provider
+
+//=====
+
+function randomName () {
+  return Math.round(Math.random() * 200000000).toString(16).padStart(7, '0').toUpperCase()
+}
