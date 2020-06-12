@@ -1,13 +1,13 @@
 {
   "scripts": {
-    "start": "concurrently 'y-websocket-server' 'budo index.js --live'"
+    "start": "concurrently 'y-webrtc-signaling' 'budo index.js --live'"
   },
   "dependencies": {
     "pamphlet": "^3.1.0",
     "prosemirror-keymap": "^1.1.4",
     "y-prosemirror": "^0.3.5",
-    "yjs": "^13.2.0",
-    "y-websocket": "^1.3.0"
+    "y-webrtc": "^10.1.5",
+    "yjs": "^13.2.0"
   },
   "devDependencies": {
     "budo": "^11.6.3",

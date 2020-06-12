@@ -1,16 +1,19 @@
-var { WebsocketProvider } = require('y-websocket')
+var { WebrtcProvider } = require('y-webrtc')
 var { keymap } = require('prosemirror-keymap')
 var { ySyncPlugin, yCursorPlugin, yUndoPlugin, undo, redo } = require('y-prosemirror')
 var Pamphlet = require('pamphlet')
 var Y = require('yjs')
 
-var ws = new URL(location)
-ws.protocol = 'ws:'
-ws.port= '1234'
+var signaling = []
+var local = new URL(location)
+local.protocol = 'ws:'
+local.port= '4444'
+signaling.push(local)
 
 var doc = new Y.Doc()
-var fragment = doc.getXmlFragment('draft')
-var provider = new WebsocketProvider(ws.href, 'draft', doc)
+var room = 'draft'
+var fragment = doc.getXmlFragment(room)
+var provider = new WebrtcProvider(room, doc, { signaling })
 var name = randomName()
 
 provider.awareness.setLocalStateField('user', { name })
