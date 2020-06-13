@@ -4,17 +4,19 @@ var { ySyncPlugin, yCursorPlugin, yUndoPlugin, undo, redo } = require('y-prosemi
 var Pamphlet = require('pamphlet')
 var Y = require('yjs')
 
-var doc = new Y.Doc()
-var room = 'draft'
-var fragment = doc.getXmlFragment(room)
-var provider = new WebrtcProvider(room, doc)
-var name = randomName()
+var room = location.host + location.pathname
+var password = location.host
 
-provider.awareness.setLocalStateField('user', { name })
+var doc = new Y.Doc()
+var content = doc.getXmlFragment(room)
+var network = new WebrtcProvider(room, doc, { password })
+var user = randomName()
+
+network.awareness.setLocalStateField('user', { name: user })
 
 var plugins = [
-  ySyncPlugin(fragment),
-  yCursorPlugin(provider.awareness),
+  ySyncPlugin(content),
+  yCursorPlugin(network.awareness),
   yUndoPlugin(),
   keymap({
     'Mod-z': undo,
@@ -22,14 +24,14 @@ var plugins = [
   })
 ]
 
-window.username.setAttribute('placeholder', name)
+window.username.setAttribute('placeholder', user)
 window.username.addEventListener('input', event => {
-  provider.awareness.setLocalStateField('user', { name: event.target.value || name })
+  network.awareness.setLocalStateField('user', { name: event.target.value || user })
 })
 
 window.editor = new Pamphlet(window.writer, { plugins })
-window.fragment = fragment
-window.provider = provider
+window.content = content
+window.network = network
 
 //=====
 
