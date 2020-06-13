@@ -3,7 +3,7 @@
     "install": "browserify src/draft.js -o ui/js/draft.js"
   },
   "dependencies": {
-    "pamphlet": "^3.1.0",
+    "pamphlet": "^3.2.1",
     "prosemirror-keymap": "^1.1.4",
     "y-prosemirror": "^0.3.5",
     "y-webrtc": "^10.1.5",
