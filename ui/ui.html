@@ -33,19 +33,18 @@
 
       window.drive = beaker.hyperdrive.drive()
       window.save.addEventListener('click', saveFile)
-      window.addEventListener('keydown', debounce(e => {
+      window.addEventListener('keyup', e => {
         if (e.ctrlKey && e.keyCode === 83) {
           e.preventDefault()
           saveFile()
         }
-      }, 500))
+      })
 
       drive.getInfo(location.href).then(async info => {
         if (!info.writable) {
           return
         }
 
-        window.save.removeAttribute('disabled')
         window.saved = await drive.readFile(getFilename())
         window.content.doc.on('update', debounce(checkSaved, 7000, true))
         checkSaved()
@@ -58,6 +57,9 @@
       // =====
 
       async function saveFile () {
+        if (editor.content === saved) return
+        console.info('saving to drive...')
+
         window.save.toggleAttribute('disabled')
         var content = editor.content
 
