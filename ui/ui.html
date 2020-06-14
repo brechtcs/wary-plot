@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Draft</title>
+
+    <link rel="icon" href="/img/favicon.ico">
+    <link rel="stylesheet" href="/.ui/css/common.css">
+    <link rel="stylesheet" href="/.ui/css/screen.css" media="screen">
+    <link rel="stylesheet" href="/.ui/css/print.css" media="print">
+  </head>
+  <body>
+    <main>
+      <h1><a href="https://github.com/pamphlets/draft">Draft</a></h1>
+      <form>
+        <fieldset>
+          <label>Name:</label>
+          <input type="text" id="username">
+        </fieldset>
+        <fieldset>
+          <button id="save">Save</button>
+        </fieldset>
+      </form>
+      <article id="writer"></article>
+    </main>
+    <dialog class="popup"></dialog>
+    <aside id="alerts"></aside>
+
+    <script src="/.ui/js/draft.js"></script>
+    <script>
+      document.title = 'Draft · ' + getFilename()
+
+      window.drive = beaker.hyperdrive.drive()
+      window.save.addEventListener('click', async event => {
+        event.preventDefault()
+        event.target.toggleAttribute('disabled')
+        await drive.writeFile(getFilename(), editor.content).catch(console.error)
+        event.target.toggleAttribute('disabled')
+      })
+
+      drive.getInfo(location.href).then(async info => {
+        if (editor.empty && info.writable) {
+            editor.content = await drive.readFile(getFilename())
+        }
+      })
+
+      // =====
+
+      function getFilename () {
+        var filename = ''
+
+        if (location.pathname.endsWith('.md')) {
+          filename = location.pathname
+        } else if (location.pathname.endsWith('/')) {
+          filename = location.pathname + 'index.md'
+        } else {
+          filename = location.pathname + '.md'
+        }
+        return filename.replace(/^\//, '')
+      }
+    </script>
+  </body>
+</html>

@@ -9,7 +9,7 @@
 
 html {
   background-attachment: fixed;
-  background-image: url('/img/bg.jpg');
+  background-image: url('../img/bg.jpg');
   background-position: 50%;
   background-size: cover;
   overflow: auto scroll;
@@ -228,7 +228,7 @@ label.extension, select.extension {
   border: 1px solid transparent;
   border-radius: .25rem;
   outline: none;
-  padding: 0 .5em;
+  padding: 1em;
   white-space: pre-wrap;
 }
 .ProseMirror-focused {
@@ -236,10 +236,11 @@ label.extension, select.extension {
   border-color: gold;
 }
 
-.ProseMirror > .ProseMirror-yjs-cursor:first-child {
-  margin-top: 1em;
+.ProseMirror > *:first-child {
+  margin-top: 0;
 }
-.ProseMirror p:first-child, .ProseMirror h1:first-child, .ProseMirror h2:first-child, .ProseMirror h3:first-child, .ProseMirror h4:first-child, .ProseMirror h5:first-child, .ProseMirror h6:first-child {
+
+.ProseMirror > .ProseMirror-yjs-cursor:first-child {
   margin-top: 1em;
 }
 .ProseMirror-yjs-cursor {
