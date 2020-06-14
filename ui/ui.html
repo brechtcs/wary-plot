@@ -19,7 +19,7 @@
           <input type="text" id="username">
         </fieldset>
         <fieldset>
-          <button id="save">Save</button>
+          <button id="save" disabled>Save</button>
         </fieldset>
       </form>
       <article id="writer"></article>
@@ -32,20 +32,52 @@
       document.title = 'Draft · ' + getFilename()
 
       window.drive = beaker.hyperdrive.drive()
-      window.save.addEventListener('click', async event => {
-        event.preventDefault()
-        event.target.toggleAttribute('disabled')
-        await drive.writeFile(getFilename(), editor.content).catch(console.error)
-        event.target.toggleAttribute('disabled')
-      })
+      window.save.addEventListener('click', saveFile)
+      window.addEventListener('keydown', debounce(e => {
+        if (e.ctrlKey && e.keyCode === 83) {
+          e.preventDefault()
+          saveFile()
+        }
+      }, 500))
 
       drive.getInfo(location.href).then(async info => {
-        if (editor.empty && info.writable) {
-            editor.content = await drive.readFile(getFilename())
+        if (!info.writable) {
+          return
+        }
+
+        window.save.removeAttribute('disabled')
+        window.saved = await drive.readFile(getFilename())
+        window.content.doc.on('update', debounce(checkSaved, 7000, true))
+        checkSaved()
+
+        if (editor.empty) {
+          editor.content = saved
         }
       })
 
       // =====
+
+      async function saveFile () {
+        window.save.toggleAttribute('disabled')
+        var content = editor.content
+
+        try {
+          await drive.writeFile(getFilename(), content)
+          window.saved = content
+        } catch(err) {
+          console.error(err)
+        } finally {
+          checkSaved()
+        }
+      }
+
+      async function checkSaved () {
+        if (editor.content !== saved) {
+          window.save.removeAttribute('disabled')
+        } else {
+          window.save.setAttribute('disabled', true)
+        }
+      }
 
       function getFilename () {
         var filename = ''
@@ -58,6 +90,21 @@
           filename = location.pathname + '.md'
         }
         return filename.replace(/^\//, '')
+      }
+
+      function debounce (fn, ms, immediate) {
+        var timeout = null
+
+        return function (...args) {
+          var now = immediate && !timeout
+          clearTimeout(timeout)
+          timeout = setTimeout(() => {
+            timeout = null
+            if (!immediate) fn.apply(this, args)
+          }, ms)
+
+          if (now) fn.apply(this, args)
+        }
       }
     </script>
   </body>
