@@ -1,15 +1,20 @@
 {
   "scripts": {
-    "install": "browserify src/draft.js -o ui/js/draft.js"
+    "build": "rollup -i src/draft.js -o ui/js/draft.js -f es -c",
+    "install": "npm run build"
   },
   "dependencies": {
     "pamphlet": "^3.2.1",
     "prosemirror-keymap": "^1.1.4",
+    "y-indexeddb": "^9.0.3",
     "y-prosemirror": "^0.3.5",
     "y-webrtc": "^10.1.5",
     "yjs": "^13.2.0"
   },
   "devDependencies": {
-    "browserify": "^16.5.1"
+    "@rollup/plugin-commonjs": "^13.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^8.0.1",
+    "rollup": "^2.15.0"
   }
 }
