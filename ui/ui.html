@@ -19,13 +19,14 @@
           <input type="text" id="username">
         </fieldset>
         <fieldset>
-          <button id="save" disabled>Save</button>
-        </fieldset>
-        <fieldset>
           <output id="words">0</output>
           <label>Words</label>
           <output id="chars">0</output>
           <label>Chars</label>
+        </fieldset>
+        <fieldset>
+          <button id="reset" disabled>Reset</button>
+          <button id="save" disabled>Save</button>
         </fieldset>
       </form>
       <article id="writer"></article>
@@ -44,6 +45,7 @@
       document.addEventListener('selectionchange', debounce(updateCounters, 250))
       updateCounters()
 
+      window.reset.addEventListener('click', resetFile)
       window.save.addEventListener('click', saveFile)
       window.addEventListener('keyup', e => {
         if (e.ctrlKey && e.keyCode === 83) {
@@ -69,6 +71,11 @@
 
       // =====
 
+      function resetFile () {
+        editor.content = saved
+        checkSaved()
+      }
+
       async function saveFile () {
         if (editor.content === saved) return
         console.info('saving to drive...')
@@ -88,8 +95,10 @@
 
       async function checkSaved () {
         if (editor.content !== saved) {
+          window.reset.removeAttribute('disabled')
           window.save.removeAttribute('disabled')
         } else {
+          window.reset.setAttribute('disabled', true)
           window.save.setAttribute('disabled', true)
         }
       }
