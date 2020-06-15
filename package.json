@@ -4,7 +4,7 @@
     "install": "npm run build"
   },
   "dependencies": {
-    "pamphlet": "^3.2.1",
+    "pamphlet": "^3.3.0",
     "prosemirror-keymap": "^1.1.4",
     "y-indexeddb": "^9.0.3",
     "y-prosemirror": "^0.3.5",

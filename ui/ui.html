@@ -21,6 +21,12 @@
         <fieldset>
           <button id="save" disabled>Save</button>
         </fieldset>
+        <fieldset>
+          <output id="words">0</output>
+          <label>Words</label>
+          <output id="chars">0</output>
+          <label>Chars</label>
+        </fieldset>
       </form>
       <article id="writer"></article>
     </main>
@@ -28,10 +34,16 @@
     <aside id="alerts"></aside>
 
     <script src="/.ui/js/draft.js"></script>
-    <script>
+    <script type="module">
+      import { debounce } from '/.ui/js/util.js'
+
       document.title = 'Draft · ' + getFilename()
 
       window.drive = beaker.hyperdrive.drive()
+      window.content.doc.on('update', debounce(updateCounters, 250))
+      document.addEventListener('selectionchange', debounce(updateCounters, 250))
+      updateCounters()
+
       window.save.addEventListener('click', saveFile)
       window.addEventListener('keyup', e => {
         if (e.ctrlKey && e.keyCode === 83) {
@@ -51,6 +63,7 @@
 
         if (editor.empty) {
           editor.content = saved
+          updateCounters()
         }
       })
 
@@ -81,6 +94,12 @@
         }
       }
 
+      function updateCounters () {
+        var { chars, words } = editor.count()
+        window.chars.innerText = chars
+        window.words.innerText = words
+      }
+
       function getFilename () {
         var filename = ''
 
@@ -92,21 +111,6 @@
           filename = location.pathname + '.md'
         }
         return filename.replace(/^\//, '')
-      }
-
-      function debounce (fn, ms, immediate) {
-        var timeout = null
-
-        return function (...args) {
-          var now = immediate && !timeout
-          clearTimeout(timeout)
-          timeout = setTimeout(() => {
-            timeout = null
-            if (!immediate) fn.apply(this, args)
-          }, ms)
-
-          if (now) fn.apply(this, args)
-        }
       }
     </script>
   </body>
