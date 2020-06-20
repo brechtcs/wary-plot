@@ -5,39 +5,40 @@ import { keymap } from 'prosemirror-keymap'
 import { ySyncPlugin, yCursorPlugin, yUndoPlugin, undo, redo } from 'y-prosemirror'
 import Pamphlet from 'pamphlet'
 
-var room = location.host + location.pathname
-var password = location.host
+export { default as crel } from 'crelt'
+export { default as debounce } from 'debounce'
 
-var doc = new Y.Doc()
-var content = doc.getXmlFragment(room)
-var network = new WebrtcProvider(room, doc, { password })
-var storage = new IndexeddbPersistence(room, doc)
-var user = randomName()
+export class Draft {
+  constructor (element, room, user) {
+    this.room = room || this.rand()
+    this.doc = new Y.Doc()
+    this.network = new WebrtcProvider(this.room, this.doc, { password: this.room })
+    this.storage = new IndexeddbPersistence(this.room, this.doc)
+    this.editor = new Pamphlet(element, { plugins: this.plugins })
+    this.user = user || { name: this.rand() }
+  }
 
-network.awareness.setLocalStateField('user', { name: user })
+  rand () {
+    return Math.round(Math.random() * Date.now()).toString(16).padStart(12, '0')
+  }
 
-var plugins = [
-  ySyncPlugin(content),
-  yCursorPlugin(network.awareness),
-  yUndoPlugin(),
-  keymap({
-    'Mod-z': undo,
-    'Mod-Shift-z': redo
-  })
-]
+  get plugins () {
+    return [
+      ySyncPlugin(this.doc.getXmlFragment(this.room)),
+      yCursorPlugin(this.network.awareness),
+      yUndoPlugin(),
+      keymap({
+        'Mod-z': undo,
+        'Mod-Shift-z': redo
+      })
+    ]
+  }
 
-window.username.setAttribute('placeholder', user)
-window.username.addEventListener('input', event => {
-  network.awareness.setLocalStateField('user', { name: event.target.value || user })
-})
+  get user () {
+    return this.network.awareness.getLocalState().user
+  }
 
-window.editor = new Pamphlet(window.writer, { plugins })
-window.content = content
-window.network = network
-window.storage = storage
-
-//=====
-
-function randomName () {
-  return Math.round(Math.random() * 200000000).toString(16).padStart(7, '0').toUpperCase()
+  set user (user) {
+    this.network.awareness.setLocalStateField('user', user)
+  }
 }

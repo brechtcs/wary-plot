@@ -4,6 +4,8 @@
     "install": "npm run build"
   },
   "dependencies": {
+    "crelt": "^1.0.4",
+    "debounce": "^1.2.0",
     "pamphlet": "^3.3.0",
     "prosemirror-keymap": "^1.1.4",
     "y-indexeddb": "^9.0.3",

@@ -215,6 +215,9 @@ input {
 input:focus {
   background: dimgray;
 }
+input:focus::::placeholder {
+  color: transparent;
+}
 
 label.extension, select.extension {
   font-variant: normal;
