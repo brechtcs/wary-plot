@@ -1,4 +1,6 @@
-import { Draft, basename, crel, debounce, dirname, ready } from '/js/lib.js'
+import { Draft, basename, crel, debounce, dirname, ready } from './lib.js'
+import { formatTimestamp } from './util.js'
+import { listDrafts, loadUser } from './storage.js'
 
 var url = new URL(location)
 var user = loadUser()
@@ -76,53 +78,6 @@ ready(() => {
     window.drafts.append(item)
   })
 })
-
-function formatTimestamp (ms) {
-  var date = new Date(ms)
-  var year = 1900 + date.getYear()
-  var month = String(date.getMonth() + 1).padStart(2, '0')
-  var day = String(date.getDate()).padStart(2, '0')
-  var hours = String(date.getHours()).padStart(2, '0')
-  var minutes = String(date.getMinutes()).padStart(2, '0')
-  return `${year}-${month}-${day} ${hours}:${minutes}`
-}
-
-function listDrafts () {
-  var drafts = {}
-  var order = (a, b) => b.opened - a.opened
-
-  for (var key in localStorage) {
-    if (!key.startsWith('title|')) {
-      continue
-    }
-
-    var id = key.replace(/^title\|/, '')
-    if (!drafts[id]) drafts[id] = { id }
-    drafts[id].title = localStorage[key]
-    drafts[id].opened = 0
-  }
-
-  for (var key in sessionStorage) {
-    if (!key.startsWith('opened|')) {
-      continue
-    }
-
-    var id = key.replace(/^opened\|/, '')
-    if (!drafts[id]) drafts[id] = { id }
-    drafts[id].opened = Number(sessionStorage[key])
-  }
-
-  return Object.values(drafts).sort(order)
-}
-
-function loadUser () {
-  try {
-    return JSON.parse(localStorage.user)
-  } catch (err) {
-    console.debug(err)
-    return null
-  }
-}
 
 function updateCounters () {
   var { chars, words } = draft.editor.count()
