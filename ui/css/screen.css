@@ -227,7 +227,7 @@ input {
 input:focus {
   background: dimgray;
 }
-input:focus::::placeholder {
+input:focus::placeholder {
   color: transparent;
 }
 
@@ -245,6 +245,13 @@ label.extension, select.extension {
   outline: none;
   padding: 1em;
   white-space: pre-wrap;
+}
+.ProseMirror-empty::before {
+  content: 'Start drafting...';
+  opacity: .62;
+}
+.ProseMirror-focused::before {
+  display: none;
 }
 .ProseMirror-focused {
   background: black;
