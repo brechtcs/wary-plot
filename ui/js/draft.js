@@ -20,6 +20,10 @@ ready(() => {
     history.pushState({}, '', url)
   }
 
+  window.draft.doc.on('update', debounce(updateCounters, 50, true))
+  document.addEventListener('selectionchange', debounce(updateCounters, 1500))
+  updateCounters()
+
   window.title.addEventListener('input', debounce(event => {
     localStorage.setItem('title|' + draft.room, event.target.value)
   }, 750))
@@ -100,4 +104,10 @@ function loadUser () {
     console.debug(err)
     return null
   }
+}
+
+function updateCounters () {
+  var { chars, words } = draft.editor.count()
+  window.chars.innerText = chars
+  window.words.innerText = words
 }
