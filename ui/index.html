@@ -16,6 +16,11 @@
       <h1><a href="https://github.com/pamphlets/draft">Draft</a></h1>
       <form>
         <fieldset>
+          <button id="new">+ New</button>
+          <button id="browse">Open</button>
+          <button id="save" disabled>Save</button>
+        </fieldset>
+        <fieldset>
           <label>Title:</label>
           <input type="text" id="title">
         </fieldset>
@@ -23,15 +28,12 @@
           <label>User:</label>
           <input type="text" id="username">
         </fieldset>
-        <fieldset>
-          <button id="browse">Open</button>
-        </fieldset>
       </form>
       <article id="writer"></article>
     </main>
     <dialog id="popup" class="popup">
-      <h1>Open Draft</h1>
-      <ul class="drafts"></ul>
+      <h1>Recent Drafts</h1>
+      <ul id="drafts" class="drafts"></ul>
       <section class="actions">
         <button id="cancel" class="cancel">Close</button>
       </section>

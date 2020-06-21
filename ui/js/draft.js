@@ -1,4 +1,4 @@
-import { Draft, debounce, ready } from '/js/lib.js'
+import { Draft, crel, debounce, ready } from '/js/lib.js'
 
 ready(() => {
   var url = new URL(location)
@@ -7,6 +7,7 @@ ready(() => {
   window.draft = new Draft(window.writer, url.searchParams.get('room'), user)
   window.title.setAttribute('placeholder', 'Untitled')
   window.username.setAttribute('placeholder', draft.user.name)
+  sessionStorage.setItem('opened|' + draft.room, Date.now())
 
   if (user) {
     window.username.value = user.name
@@ -19,10 +20,6 @@ ready(() => {
     history.pushState({}, '', url)
   }
 
-  if (!window.title.value) {
-    sessionStorage.setItem('recent|' + draft.room, Date.now())
-  }
-
   window.title.addEventListener('input', debounce(event => {
     localStorage.setItem('title|' + draft.room, event.target.value)
   }, 750))
@@ -31,6 +28,10 @@ ready(() => {
     draft.user = { name: event.target.value }
     localStorage.setItem('user', JSON.stringify(draft.user))
   }, 750))
+
+  window.new.addEventListener('click', event => {
+    location = '/'
+  })
 
   window.browse.addEventListener('click', event => {
     event.preventDefault()
@@ -43,7 +44,54 @@ ready(() => {
     window.popup.toggleAttribute('open')
     window.main.classList.remove('blur')
   })
+
+  listDrafts().forEach(draft => {
+    var href = '/?room=' + draft.id
+    var item = crel('li',
+      crel('a', { href }, draft.title || 'Untitled'),
+      crel('time', formatTimestamp(draft.opened))
+    )
+
+    window.drafts.append(item)
+  })
 })
+
+function formatTimestamp (ms) {
+  var date = new Date(ms)
+  var year = 1900 + date.getYear()
+  var month = String(date.getMonth() + 1).padStart(2, '0')
+  var day = String(date.getDate()).padStart(2, '0')
+  var hours = String(date.getHours()).padStart(2, '0')
+  var minutes = String(date.getMinutes()).padStart(2, '0')
+  return `${year}-${month}-${day} ${hours}:${minutes}`
+}
+
+function listDrafts () {
+  var drafts = {}
+  var order = (a, b) => b.opened - a.opened
+
+  for (var key in localStorage) {
+    if (!key.startsWith('title|')) {
+      continue
+    }
+
+    var id = key.replace(/^title\|/, '')
+    if (!drafts[id]) drafts[id] = { id }
+    drafts[id].title = localStorage[key]
+  }
+
+  for (var key in sessionStorage) {
+    if (!key.startsWith('opened|')) {
+      continue
+    }
+
+    var id = key.replace(/^opened\|/, '')
+    if (!drafts[id]) drafts[id] = { id }
+    drafts[id].opened = Number(sessionStorage[key])
+  }
+
+  return Object.values(drafts).sort(order)
+}
 
 function loadUser () {
   try {

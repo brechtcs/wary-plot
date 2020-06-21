@@ -129,15 +129,27 @@ hr {
 }
 
 ul {
-  list-style: none;
+  list-style-position: inside;
+  list-style-type: '· ';
   padding: 0;
 }
-ul > li:before {
-  content: '· ';
-}
+
 ul.drafts:empty::before {
   content: 'No drafts here';
   font-style: italic;
+}
+ul.drafts li time {
+  font-style: italic;
+  margin-left: 1em;
+}
+ul.drafts li:first-of-type time::before {
+  content: '(opened: '
+}
+ul.drafts li time::before {
+  content: '('
+}
+ul.drafts li time::after {
+  content: ')'
 }
 
 time {
