@@ -70,7 +70,7 @@ ready(() => {
     var href = '/editor?room=' + draft.id
     var item = crel('li',
       crel('a', { href }, draft.title || 'Untitled'),
-      crel('time', formatTimestamp(draft.opened))
+      draft.opened > 0 ? crel('time', formatTimestamp(draft.opened)) : null
     )
 
     window.drafts.append(item)
@@ -99,6 +99,7 @@ function listDrafts () {
     var id = key.replace(/^title\|/, '')
     if (!drafts[id]) drafts[id] = { id }
     drafts[id].title = localStorage[key]
+    drafts[id].opened = 0
   }
 
   for (var key in sessionStorage) {
