@@ -239,6 +239,10 @@ label.extension, select.extension {
   cursor: default;
 }
 
+article#writer {
+  margin-left: -1em;
+  margin-right: -1em;
+}
 .ProseMirror {
   border: 1px solid transparent;
   border-radius: .25rem;
