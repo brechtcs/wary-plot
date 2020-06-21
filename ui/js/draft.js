@@ -1,9 +1,9 @@
-import { Draft, crel, debounce, ready } from '/js/lib.js'
+import { Draft, basename, crel, debounce, dirname, ready } from '/js/lib.js'
+
+var url = new URL(location)
+var user = loadUser()
 
 ready(() => {
-  var url = new URL(location)
-  var user = loadUser()
-
   window.draft = new Draft(window.writer, url.searchParams.get('room'), user)
   window.title.setAttribute('placeholder', 'Untitled')
   window.username.setAttribute('placeholder', draft.user.name)
@@ -48,6 +48,23 @@ ready(() => {
     window.popup.toggleAttribute('open')
     window.main.classList.remove('blur')
   })
+
+  if ('beaker' in window) {
+    window.save.removeAttribute('disabled')
+    window.save.addEventListener('click', async event => {
+      event.preventDefault()
+
+      var prev = JSON.parse(localStorage.getItem('file|' + draft.room))
+      var file = await beaker.shell.saveFileDialog({
+        defaultFilename: prev ? basename(prev.path) : window.title.value + '.md',
+        defaultPath: prev ? dirname(prev.path): null,
+        drive: prev ? prev.origin : null
+      })
+
+      await beaker.hyperdrive.writeFile(file.url, draft.editor.content)
+      localStorage.setItem('file|' + draft.room, JSON.stringify(file))
+    })
+  }
 
   listDrafts().forEach(draft => {
     var href = '/?room=' + draft.id
