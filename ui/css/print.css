@@ -6,7 +6,7 @@ body {
   padding: 2.54cm 1.8cm;
 }
 
-main > header, form, .ck-body-wrapper {
+main > h1, form, dialog, aside {
   display: none !important;
 }
 
