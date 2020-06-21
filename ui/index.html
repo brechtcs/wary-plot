@@ -9,41 +9,13 @@
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/screen.css" media="screen">
     <link rel="stylesheet" href="/css/print.css" media="print">
-    <script src="/js/draft.js" type="module"></script>
   </head>
   <body>
-    <main id="main">
-      <h1><a href="https://github.com/pamphlets/draft">Draft</a></h1>
-      <form>
-        <fieldset>
-          <button id="new">+ New</button>
-          <button id="browse">Open</button>
-          <button id="save" disabled>Save</button>
-        </fieldset>
-        <fieldset>
-          <label>Title:</label>
-          <input type="text" id="title">
-        </fieldset>
-        <fieldset>
-          <label>User:</label>
-          <input type="text" id="username">
-        </fieldset>
-        <fieldset>
-          <output id="words">0</output>
-          <label>Words</label>
-          <output id="chars">0</output>
-          <label>Chars</label>
-        </fieldset>
-      </form>
-      <article id="writer"></article>
+    <main>
+      <h1>Draft</h1>
+      <article>
+        <a href="/editor">Start drafting...</a>
+      </article>
     </main>
-    <dialog id="popup" class="popup">
-      <h1>Recent Drafts</h1>
-      <ul id="drafts" class="drafts"></ul>
-      <section class="actions">
-        <button id="cancel" class="cancel">Close</button>
-      </section>
-    </dialog>
-    <aside id="alerts"></aside>
   </body>
 </html>

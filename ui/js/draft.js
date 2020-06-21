@@ -34,7 +34,7 @@ ready(() => {
   }, 750))
 
   window.new.addEventListener('click', event => {
-    location = '/'
+    location = '/editor'
   })
 
   window.browse.addEventListener('click', event => {
@@ -67,7 +67,7 @@ ready(() => {
   }
 
   listDrafts().forEach(draft => {
-    var href = '/?room=' + draft.id
+    var href = '/editor?room=' + draft.id
     var item = crel('li',
       crel('a', { href }, draft.title || 'Untitled'),
       crel('time', formatTimestamp(draft.opened))
