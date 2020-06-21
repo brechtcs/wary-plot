@@ -5,10 +5,7 @@ import { keymap } from 'prosemirror-keymap'
 import { ySyncPlugin, yCursorPlugin, yUndoPlugin, undo, redo } from 'y-prosemirror'
 import Pamphlet from 'pamphlet'
 
-export { default as crel } from 'crelt'
-export { default as debounce } from 'debounce'
-
-export class Draft {
+export default class Draft {
   constructor (element, room, user) {
     this.room = room || this.rand()
     this.doc = new Y.Doc()

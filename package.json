@@ -1,11 +1,12 @@
 {
   "scripts": {
-    "build": "rollup -i src/draft.js -o ui/js/draft.js -f es -c",
+    "build": "rollup -i src/lib.js -o ui/js/lib.js -f es -c",
     "install": "npm run build"
   },
   "dependencies": {
     "crelt": "^1.0.4",
     "debounce": "^1.2.0",
+    "document-ready": "^2.0.2",
     "pamphlet": "^3.3.0",
     "prosemirror-keymap": "^1.1.4",
     "y-indexeddb": "^9.0.3",
@@ -17,6 +18,7 @@
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
-    "rollup": "^2.15.0"
+    "rollup": "^2.15.0",
+    "rollup-plugin-node-builtins": "^2.1.2"
   }
 }

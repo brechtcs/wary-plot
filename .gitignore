@@ -1,4 +1,4 @@
 node_modules
 ui/.hyperdrive-export-key
 ui/.hyperdrive-import-key
-ui/js/draft.js
+ui/js/lib.js
