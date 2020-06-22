@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "rollup -i src/lib.js -o ui/js/lib.js -f es -c",
+    "build": "fastroll src/lib.js -o ui/js/lib.js",
     "install": "npm run build"
   },
   "dependencies": {
@@ -15,10 +15,6 @@
     "yjs": "^13.2.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^13.0.0",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^8.0.1",
-    "rollup": "^2.15.0",
-    "rollup-plugin-node-builtins": "^2.1.2"
+    "fastroll": "^1.0.0"
   }
 }
