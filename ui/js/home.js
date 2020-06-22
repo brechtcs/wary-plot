@@ -1,19 +1,14 @@
-import { crel, ready } from './lib.js'
-import { formatTimestamp } from './util.js'
-import { listDrafts } from './storage.js'
+import { createBrowseDialog } from './dialogs.js'
+import { ready } from './lib.js'
 
 ready(() => {
-  listDrafts().forEach(draft => {
-    var href = '/editor?room=' + draft.id
-    var item = crel('li', crel('a', { href }, draft.title || 'Untitled'))
-    window.drafts.append(item)
+  window.new.addEventListener('click', event => {
+    location = '/editor'
   })
 
-  var create = crel('button', '+ New')
-  create.addEventListener('click', createDraft)
-  window.nav.append(create)
+  window.browse.addEventListener('click', event => {
+    event.preventDefault()
+    document.body.append(createBrowseDialog())
+    window.main.classList.add('blur')
+  })
 })
-
-function createDraft () {
-  location = '/editor'
-}

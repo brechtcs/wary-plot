@@ -1,6 +1,6 @@
 import { Draft, basename, crel, debounce, dirname, ready } from './lib.js'
-import { formatTimestamp } from './util.js'
-import { listDrafts, loadUser } from './storage.js'
+import { createBrowseDialog } from './dialogs.js'
+import { loadUser } from './storage.js'
 
 var url = new URL(location)
 var user = loadUser()
@@ -41,14 +41,8 @@ ready(() => {
 
   window.browse.addEventListener('click', event => {
     event.preventDefault()
-    window.popup.toggleAttribute('open')
+    document.body.append(createBrowseDialog())
     window.main.classList.add('blur')
-  })
-
-  window.cancel.addEventListener('click', event => {
-    event.preventDefault()
-    window.popup.toggleAttribute('open')
-    window.main.classList.remove('blur')
   })
 
   if ('beaker' in window) {
@@ -67,16 +61,6 @@ ready(() => {
       localStorage.setItem('file|' + draft.room, JSON.stringify(file))
     })
   }
-
-  listDrafts().forEach(draft => {
-    var href = '/editor?room=' + draft.id
-    var item = crel('li',
-      crel('a', { href }, draft.title || 'Untitled'),
-      draft.opened > 0 ? crel('time', formatTimestamp(draft.opened)) : null
-    )
-
-    window.drafts.append(item)
-  })
 })
 
 function updateCounters () {

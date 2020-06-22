@@ -142,11 +142,8 @@ ul.drafts li time {
   font-style: italic;
   margin-left: 1em;
 }
-ul.drafts li:first-of-type time::before {
-  content: '(opened: '
-}
 ul.drafts li time::before {
-  content: '('
+  content: '(opened: '
 }
 ul.drafts li time::after {
   content: ')'
