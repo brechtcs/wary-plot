@@ -1,11 +1,11 @@
-import * as Y from 'yjs'
-import { IndexeddbPersistence } from 'y-indexeddb'
-import { WebrtcProvider } from 'y-webrtc'
-import { keymap } from 'prosemirror-keymap'
-import { ySyncPlugin, yCursorPlugin, yUndoPlugin, undo, redo } from 'y-prosemirror'
-import Pamphlet from 'pamphlet'
+var { IndexeddbPersistence } = require('y-indexeddb')
+var { WebrtcProvider } = require('y-webrtc')
+var { keymap } = require('prosemirror-keymap')
+var { ySyncPlugin, yCursorPlugin, yUndoPlugin, undo, redo } = require('y-prosemirror')
+var Pamphlet = require('pamphlet')
+var Y = require('yjs')
 
-export default class Draft {
+class Draft {
   constructor (element, room, user) {
     this.room = room || this.rand()
     this.doc = new Y.Doc()
@@ -39,3 +39,5 @@ export default class Draft {
     this.network.awareness.setLocalStateField('user', user)
   }
 }
+
+module.exports = Draft

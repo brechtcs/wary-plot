@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "fastroll src/lib.js -o ui/js/lib.js",
+    "build": "fastroll lib.js -o ui/js/lib.js",
     "install": "npm run build"
   },
   "dependencies": {
