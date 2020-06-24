@@ -1,4 +1,4 @@
-import { Draft, basename, crel, debounce, dirname, ready } from './lib.js'
+import { Editorial, basename, crel, debounce, dirname, ready } from './lib.js'
 import { createBrowseDialog } from './dialogs.js'
 import { loadUser } from './storage.js'
 
@@ -6,7 +6,7 @@ var url = new URL(location)
 var user = loadUser()
 
 ready(() => {
-  window.draft = new Draft(window.writer, url.searchParams.get('room'), user)
+  window.draft = new Editorial(window.writer, url.searchParams.get('room'), user)
   window.title.setAttribute('placeholder', 'Untitled')
   window.username.setAttribute('placeholder', draft.user.name)
   sessionStorage.setItem('opened|' + draft.room, Date.now())
