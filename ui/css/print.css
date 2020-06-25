@@ -6,7 +6,7 @@ body {
   padding: 2.54cm 1.8cm;
 }
 
-main > h1, form, dialog, aside {
+main > h1, nav, form, dialog, aside {
   display: none !important;
 }
 
