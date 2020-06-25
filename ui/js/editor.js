@@ -1,5 +1,5 @@
 import { Editorial, basename, crel, debounce, dirname, ready } from './lib.js'
-import { createBrowseDialog } from './dialogs.js'
+import { createBrowseDialog, createSaveDialog } from './dialogs.js'
 import { loadUser } from './storage.js'
 
 var url = new URL(location)
@@ -41,15 +41,13 @@ ready(() => {
 
   window.browse.addEventListener('click', event => {
     event.preventDefault()
-    document.body.append(createBrowseDialog())
-    window.main.classList.add('blur')
+    appendModal(createBrowseDialog())
   })
 
-  if ('beaker' in window) {
-    window.save.removeAttribute('disabled')
-    window.save.addEventListener('click', async event => {
-      event.preventDefault()
+  window.save.addEventListener('click', async event => {
+    event.preventDefault()
 
+    if ('beaker' in window) {
       var prev = JSON.parse(localStorage.getItem('file|' + draft.room))
       var file = await beaker.shell.saveFileDialog({
         defaultFilename: prev ? basename(prev.path) : window.title.value + '.md',
@@ -59,9 +57,16 @@ ready(() => {
 
       await beaker.hyperdrive.writeFile(file.url, draft.editor.content)
       localStorage.setItem('file|' + draft.room, JSON.stringify(file))
-    })
-  }
+    } else {
+      appendModal(createSaveDialog())
+    }
+  })
 })
+
+function appendModal (dialog) {
+  window.main.classList.add('blur')
+  document.body.append(dialog)
+}
 
 function updateCounters () {
   var { chars, words } = draft.editor.count()
