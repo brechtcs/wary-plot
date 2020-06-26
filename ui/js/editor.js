@@ -22,6 +22,10 @@ ready(() => {
     history.pushState({}, '', url)
   }
 
+  if (window.title.value) {
+    document.title = document.title.replace(/^Draft/, window.title.value)
+  }
+
   window.draft.doc.on('update', debounce(updateCounters, 50, true))
   document.addEventListener('selectionchange', debounce(updateCounters, 1500))
   updateCounters()
