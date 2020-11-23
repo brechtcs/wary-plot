@@ -8,7 +8,7 @@
     forceSSL = true;
 
     locations."/" = {
-      root = "/home/brecht/sites/drafts.pamphlets.me/ui";
+      root = "/ipfs/QmUhk5ov1PY28doSkHPBQwzHRZ68RZgapBGBTWfF8hgc6s";
       tryFiles = "$uri $uri/index.html $uri.html =404";
     };
   };
